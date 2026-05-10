@@ -1,0 +1,18 @@
+REM ===== Experiment D: SET REACTANT ALL replace =====
+VARIABLE %EquiFile %OutDir
+HIDE
+HIDE_MACRO
+
+%EquiFile = "D:\Nercar\Wuhu\Apps\factsage_app\inclusionprecipitation\demo\case.equi"
+%OutDir   = "D:\Nercar\Wuhu\Apps\factsage_app\inclusionprecipitation\demo\test_output\testD\"
+
+OPEN %EquiFile
+
+REM case.equi reactant order: C, W, Mo, Cr, Ti, Al, B, Zr, Fe, O (10 total)
+REM Replace all with new values - simulate a low alloy steel
+SET REACTANT ALL MASS 0.4 0 0.3 15.0 2.0 1.5 0 0 80.79 0.01
+
+CALC
+SAVE "%OutDirEquiD.res"
+
+END

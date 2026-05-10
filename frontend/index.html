@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FactSage 夹杂物/析出相计算</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="header">
+        <h1 class="header-title">FactSage 夹杂物/析出相计算系统</h1>
+        <span id="mockBadge" class="mock-badge" style="display:none;">模拟模式</span>
+    </header>
+
+    <main class="main-container">
+        <!-- 左侧面板：输入 -->
+        <aside class="panel-left">
+            <!-- 模板选择 -->
+            <section class="card">
+                <h2 class="card-title">计算模板</h2>
+                <select id="templateSelect" class="input-full">
+                    <option value="">-- 请选择模板 --</option>
+                </select>
+                <p id="templateDesc" class="template-desc"></p>
+            </section>
+
+            <!-- 元素输入 -->
+            <section class="card">
+                <div class="element-card-header">
+                    <h2 class="card-title">元素组成</h2>
+                    <div id="totalMassIndicator" class="total-mass-indicator" style="display:none;">
+                        总质量: <span id="totalMassValue">0</span> g
+                    </div>
+                </div>
+                <div id="elementInputs" class="element-inputs">
+                    <p class="hint-text">请先选择计算模板</p>
+                </div>
+            </section>
+
+            <!-- 温度与压力 -->
+            <section class="card">
+                <h2 class="card-title">温度范围与压力</h2>
+                <div class="temp-grid">
+                    <div class="form-group">
+                        <label for="tempStart">起始温度 (°C)</label>
+                        <input type="number" id="tempStart" class="input-full" placeholder="例: 1200">
+                    </div>
+                    <div class="form-group">
+                        <label for="tempEnd">终止温度 (°C)</label>
+                        <input type="number" id="tempEnd" class="input-full" placeholder="例: 1600">
+                    </div>
+                    <div class="form-group">
+                        <label for="tempStep">步长 (°C)</label>
+                        <input type="number" id="tempStep" class="input-full" placeholder="例: 10">
+                    </div>
+                    <div class="form-group">
+                        <label for="pressure">压力 (atm)</label>
+                        <input type="number" id="pressure" class="input-full" value="1" step="0.1">
+                    </div>
+                </div>
+            </section>
+
+            <!-- 提交按钮与状态 -->
+            <section class="card">
+                <button id="submitBtn" class="btn-primary" onclick="submitCalculation()" disabled>
+                    开始计算
+                </button>
+                <div id="statusIndicator" class="status-indicator" style="display:none;">
+                    <span id="statusBadge" class="status-badge"></span>
+                    <span id="statusText"></span>
+                </div>
+                <div id="errorMsg" class="error-msg" style="display:none;"></div>
+            </section>
+
+            <!-- 历史记录 -->
+            <section class="card">
+                <h2 class="card-title">历史记录</h2>
+                <div id="historyList" class="history-list">
+                    <p class="hint-text">暂无历史记录</p>
+                </div>
+            </section>
+        </aside>
+
+        <!-- 右侧面板：结果 -->
+        <section class="panel-right">
+            <!-- 图表区域 -->
+            <div class="card">
+                <div id="chart" class="chart-container"></div>
+            </div>
+
+            <!-- 物种选择面板 -->
+            <div class="card">
+                <div class="species-header">
+                    <h2 class="card-title">物种选择</h2>
+                    <div class="value-type-selector">
+                        <label for="valueType">数值类型：</label>
+                        <select id="valueType" onchange="onValueTypeChange()">
+                            <option value="gram" selected>质量 (g)</option>
+                            <option value="mole">摩尔 (mol)</option>
+                            <option value="wt_pct">质量分数 (wt%)</option>
+                            <option value="activity">活度 (activity)</option>
+                            <option value="mole_fraction">摩尔分数</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="speciesPanel" class="species-panel">
+                    <p class="hint-text">完成计算后将显示可选物种</p>
+                </div>
+            </div>
+
+            <!-- 导出按钮 -->
+            <div class="card export-bar">
+                <button class="btn-export" onclick="exportCSV()" title="导出为CSV文件">导出 CSV</button>
+                <button class="btn-export" onclick="exportPNG()" title="导出图表为PNG图片">导出 PNG</button>
+                <button class="btn-export" onclick="downloadFiles()" title="下载FactSage原始输出文件">下载原始文件</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

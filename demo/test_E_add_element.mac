@@ -1,0 +1,23 @@
+REM ===== Experiment E: SET REACTANT ADD — add new element =====
+REM Purpose: Test if FactSage can add an element NOT in the original .equi
+REM Key question: Does adding Nb produce any Nb-containing precipitates?
+REM Expected: Nb reactant is accepted, but NbC/NbN etc. likely WON'T appear
+REM           because the candidate phase list doesn't include them.
+VARIABLE %EquiFile %OutDir
+HIDE
+HIDE_MACRO
+
+%EquiFile = "D:\Nercar\Wuhu\Apps\factsage_app\inclusionprecipitation\demo\case.equi"
+%OutDir   = "D:\Nercar\Wuhu\Apps\factsage_app\inclusionprecipitation\demo\test_output\testE\"
+
+OPEN %EquiFile
+
+REM Add Nb (not in original 10 elements) at 0.5g
+REM Reduce Fe to keep total ~100g: Fe = 58.785 - 0.5 = 58.285g
+SET REACTANT ADD 'Nb' 0.5
+SET REACTANT 'Fe' MASS 58.285
+
+CALC
+SAVE "%OutDirEquiE.res"
+
+END

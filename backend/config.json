@@ -1,0 +1,13 @@
+﻿{
+    "server": {
+        "host": "127.0.0.1",
+        "port": 10688
+    },
+    "factsage": {
+        "dir": "C:\\FactSage",
+        "timeout_seconds": 600
+    },
+    "mock": {
+        "enabled": "auto"
+    }
+}

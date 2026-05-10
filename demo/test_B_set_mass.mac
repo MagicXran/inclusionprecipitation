@@ -1,0 +1,20 @@
+REM ===== Experiment B: SET REACTANT modify mass =====
+VARIABLE %EquiFile %OutDir
+HIDE
+HIDE_MACRO
+
+%EquiFile = "D:\Nercar\Wuhu\Apps\factsage_app\inclusionprecipitation\demo\case.equi"
+%OutDir   = "D:\Nercar\Wuhu\Apps\factsage_app\inclusionprecipitation\demo\test_output\testB\"
+
+OPEN %EquiFile
+
+REM Change Cr from 32g to 20g, Ti from 5.4g to 3.0g
+REM Increase Fe to keep total ~100g: Fe = 58.785 + 12 + 2.4 = 73.185g
+SET REACTANT Cr MASS 20.0
+SET REACTANT Ti MASS 3.0
+SET REACTANT Fe MASS 73.185
+
+CALC
+SAVE "%OutDirEquiB.res"
+
+END

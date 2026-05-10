@@ -1,0 +1,289 @@
+FILE-00001    17:36    08May26  Wuhu Xinxing Ductile Iron Pipes Co. Ltd    FactSage 8.3
+comments
+'O' '13'
+'TC' 'ATM' 'J' 'NOVPT' 'NOPHYS' 'CUT' '1e-75 1e-75' 'WIN' 'NOTH' '%' 'NOAQUA' 'NOEPH' 
+'O' '10'
+'CXHY' '2' 'NOGIONTK' '2000' 'NODEMO' 'NOVIR' 'DILEX' '1e+7' 'NOG25' 'MINS2'
+'O' '7'
+'LIM' '250' '10000' '1.000E-35' '1.000E+08' '1.000E-08' '1.000E+35' 
+'O' '6'
+'TRNS' 'TRNUM' '0'  'NOPARA' '' ' 10   1  2  3  4  5  6  7  8  9  10' 
+'O' '3'
+'ISOP' '0' ''
+'R' 'NEW'
+ 0.35 C  +  0.2 W  +  0.8 Mo  +  32 Cr  + 
+'I' '   '
+ (1000.00,1,s1-FactPS,#1) (1000.00,1,s-FactPS,#1) (1000.00,1,s-FactPS,#1) (1000.00,1,s-FactPS,#1)
+'R' 'NEW'
+ 5.4 Ti  +  2.4 Al  +  0.005 B  +  0.05 Zr  + 
+'I' '   '
+ (1000.00,1,s1-FactPS,#1) (1000.00,1,s-FactPS,#1) (1000.00,1,s-FactPS,#1) (1000.00,1,s1-FactPS,#1)
+'R' 'NEW'
+ 58.785 Fe  +  0.01 O  =
+'I' '   '
+ (1000.00,1,s1-FactPS,#1) (1000.00,1,g-FactPS,#1)
+'F' 'WIN'
+ 'T' '800 1600 10' 'P' '1' 'DH' ''
+'DAT1' ' 3'
+FT53 ST53 OX53 
+'DAT2' ' 2'
+ST53 OX53 
+'DAT3' '0'
+ 
+'POST' '6'
+POSTPROC  SIZE 9 NO 4 OPT  0 COL  1 SCRN  0 NAME  1 REAC  1 FIG  1 OFF  1
+POSTAXES  6  3  0  0  1000  1600  100  0  100  10
+POSTLAST gram vs T(C)
+POSTGRID  MASS  1 ORDER  1 TOP 50 XSPECIES 123 R1 123 R2 124 SOURCE  0 PHASE  1 NAME  1 PAGE  0 IGNORE  0
+POSTSPEC 6
+POSTCOLS 
+'POST' 'C'
+     5  1 SOLN-LIQU  Al                          
+     5  1 SOLN-LIQU  C                           
+     5  1 SOLN-LIQU  Cr                          
+     5  1 SOLN-LIQU  B                           
+     6  1 SOLN-FCC   Fe                          
+     6  1 SOLN-FCC   Ti                          
+     6  1 SOLN-FCC   CrC                         
+     6  1 SOLN-FCC   MoC                         
+     7  1 SOLN-BCC   Mo                          
+POSTEND
+'GRID' 
+GRIDOPS   0  0  
+GRIDEND
+'SS' '629'
+ 128    +    101  1 Al3BC
+ 129    +    101  1 Al8C7B4
+ 142    +    101  1 Ti2C
+ 143    +    101  1 TiO
+ 144    +    102  1 TiO
+ 161    +    101  1 Ti2AlC
+ 162    +    101  1 Ti3AlC
+ 163    +    101  1 Ti3AlC2
+ 167    +    101  1 BCr
+ 173    +    101  1 Cr2C
+ 174    +    101  1 Cr3C
+ 179    +    101  1 CrO2
+ 180    +    101  1 CrO3
+ 182    +    101  1 Cr(CrO4)
+ 184    +    101  1 Cr2(CrO4)3
+ 185    +    101  1 Cr8O21
+ 186    +    101  1 Cr(CO)6
+ 187    +    101  1 AlCr3B4
+ 188    +    101  1 Cr2AlC
+ 193    +    101  1 Fe3B
+ 196    +    101  1 Fe3C2
+ 197    +    101  1 Fe5C2
+ 198    +    102  1 Fe5C2
+ 199    +    101  1 Fe7C3
+ 208    +    101  1 FeCO3
+ 229    +    101  1 Zr2AlC
+ 241    +    101  1 Mo23C6
+ 242    +    101  1 MoO2
+ 243    +    101  1 MoO3
+ 244    +    101  1 Mo4O11
+ 245    +    101  1 Mo8O23
+ 246    +    101  1 Mo9O26
+ 247    +    101  1 Mo(CO)6
+ 249    +    101  1 (FeO)(MoO3)
+ 257    +    101  1 W3C2
+ 258    +    101  1 WO2
+ 259    +    101  1 WO3
+ 260    +    102  1 WO3
+ 261    +    101  1 W10O29
+ 262    +    101  1 W18O49
+ 263    +    101  1 W(CO)6
+ 266    +    101  1 (FeO)(WO3)
+ 267    +    101  2 B
+ 268    +    102  2 B
+ 269    +    103  2 B
+ 270    +    104  2 B
+ 271    +    105  2 B
+ 272    +    106  2 B
+ 273    +    101  2 C
+ 274    +    102  2 C
+ 275    +    101  2 B4C
+ 277    +    101  2 Al
+ 278    +    102  2 Al
+ 279    +    103  2 Al
+ 280    +    104  2 Al
+ 281    +    105  2 Al
+ 282    +    106  2 Al
+ 283    +    107  2 Al
+ 284    +    108  2 Al
+ 285    +    109  2 Al
+ 286    +    101  2 AlB2
+ 287    +    101  2 AlB12
+ 288    +    101  2 Al4C3
+ 293    +    101  2 Ti
+ 294    +    102  2 Ti
+ 295    +    103  2 Ti
+ 296    +    104  2 Ti
+ 297    +    105  2 Ti
+ 298    +    106  2 Ti
+ 299    +    107  2 Ti
+ 300    +    101  2 TiB
+ 301    +    101  2 TiB2
+ 302    +    101  2 Ti3B4
+ 309    +    101  2 Cr
+ 310    +    102  2 Cr
+ 311    +    103  2 Cr
+ 312    +    104  2 Cr
+ 313    +    105  2 Cr
+ 314    +    101  2 CrB2
+ 315    +    101  2 CrB4
+ 316    +    101  2 Cr2B
+ 317    +    101  2 Cr3B4
+ 318    +    101  2 Cr5B3
+ 319    +    101  2 Cr3C2
+ 320    +    101  2 Cr7C3
+ 321    +    101  2 Cr20Cr3C6
+ 323    +    101  2 CrAl7
+ 324    +    101  2 Cr2Al11
+ 325    +    101  2 Cr8Ti25Al67
+ 326    +    101  2 Fe
+ 327    +    102  2 Fe
+ 328    +    101  2 FeB
+ 329    +    101  2 Fe2B
+ 330    +    101  2 Fe3C
+ 331    +    102  2 Fe3C
+ 340    +    101  2 FeAl2
+ 341    +    101  2 Fe2Al5
+ 342    +    101  2 FeTi
+ 343    +    101  2 FeTi2O5
+ 344    +    101  2 FeTi3Al8
+ 346    +    101  2 Zr
+ 347    +    102  2 Zr
+ 348    +    103  2 Zr
+ 349    +    104  2 Zr
+ 350    +    105  2 Zr
+ 351    +    106  2 Zr
+ 352    +    107  2 Zr
+ 353    +    108  2 Zr
+ 354    +    101  2 ZrB
+ 355    +    101  2 ZrB2
+ 356    +    101  2 ZrB12
+ 360    +    101  2 AlZr
+ 361    +    101  2 Al2Zr
+ 362    +    101  2 Al3Zr
+ 363    +    102  2 Al3Zr
+ 364    +    103  2 Al3Zr
+ 365    +    101  2 AlZr2
+ 366    +    101  2 Al3Zr2
+ 367    +    101  2 AlZr3
+ 368    +    101  2 Al2Zr3
+ 369    +    101  2 Al3Zr5
+ 370    +    101  2 Al4Zr5
+ 371    +    101  2 Mo
+ 372    +    102  2 Mo
+ 373    +    103  2 Mo
+ 374    +    101  2 BMo
+ 375    +    101  2 B2Mo
+ 376    +    101  2 B4Mo
+ 377    +    101  2 Mo2B
+ 378    +    101  2 B5Mo3
+ 379    +    101  2 MoC
+ 380    +    101  2 Al4Mo
+ 381    +    101  2 Al5Mo
+ 382    +    101  2 Al12Mo
+ 383    +    101  2 AlMo3
+ 384    +    101  2 Al8Mo3
+ 385    +    101  2 Al63Mo37
+ 386    +    101  2 W
+ 387    +    102  2 W
+ 388    +    103  2 W
+ 389    +    101  2 WB
+ 390    +    102  2 WB
+ 391    +    101  2 WB2
+ 392    +    101  2 W2B
+ 393    +    101  2 W2B9
+ 394    +    101  2 W7B14
+ 395    +    101  2 WC
+ 396    +    101  2 Al2W
+ 397    +    101  2 Al4W
+ 398    +    101  2 Al5W
+ 399    +    101  2 Al12W
+ 400    +    101  2 Al7W3
+ 401    +    101  2 Al77W23
+ 402    +    101  2 Fe2W
+ 403    +    101  2 CFeW3
+ 404    +    101  2 CFe6W6
+ 405    +    101  2 W2Zr
+ 406    +    101  3 B2O3
+ 407    +    101  3 Al2O3
+ 408    +    102  3 Al2O3
+ 409    +    103  3 Al2O3
+ 410    +    104  3 Al2O3
+ 411    +    101  3 (Al2O3)2(B2O3)
+ 412    +    101  3 (Al2O3)9(B2O3)2
+ 413    +    101  3 TiO2
+ 414    +    102  3 TiO2
+ 415    +    101  3 Ti2O3
+ 416    +    102  3 Ti2O3
+ 417    +    101  3 Ti3O5
+ 418    +    101  3 Ti4O7
+ 419    +    101  3 Ti5O9
+ 420    +    101  3 Ti6O11
+ 421    +    101  3 Ti7O13
+ 422    +    101  3 Ti8O15
+ 423    +    101  3 Ti9O17
+ 424    +    101  3 Ti10O19
+ 425    +    101  3 Ti20O39
+ 426    +    101  3 Ti2Al6O13
+ 427    +    101  3 Cr2O3
+ 428    +    101  3 Fe2O3
+ 429    +    102  3 Fe2O3
+ 430    +    103  3 Fe2O3
+ 431    +    101  3 Al2Fe2O6
+ 432    +    101  3 ZrO2
+ 433    +    102  3 ZrO2
+ 434    +    103  3 ZrO2
+ 435    +    101  3 ZrTiO4
+ 436    +    101  3 Ti2ZrO6
+   0    I      0  1 SOLN-LIQU  // 2 FSstel Liqu     LIQUID
+   0    J      0  1 SOLN-FCC   // 3 FSstel FCC      FCC_A1
+   0    I      0  1 SOLN-BCC   // 2 FSstel BCC      BCC_A2
+   0    I      0  1 SOLN-HCP   // 2 FSstel HCP      HCP_A3
+   0    +      0  1 SOLN-CEME  // 1 FSstel CEME     CEMENTITE
+   0    +      0  1 SOLN-M23C  // 1 FSstel M23C     M23C6
+   0    +      0  1 SOLN-M7C3  // 1 FSstel M7C3     M7C3
+   0    +      0  1 SOLN-M3C2  // 1 FSstel M3C2     M3C2
+   0    +      0  1 SOLN-M6C   // 1 FSstel M6C      M6C
+   0    +      0  1 SOLN-SIGM  // 1 FSstel SIGM     SIGMA
+   0    +      0  1 SOLN-KSIC  // 1 FSstel KSIC     KSI_CARBIDE
+   0    I      0  1 SOLN-BCC2  // 2 FSstel BCC2     BCC_B2!BCC_A2
+   0    +      0  1 SOLN-M2B   // 1 FSstel M2B      M2B_TETR
+   0    +      0  1 SOLN-MU_P  // 1 FSstel MU_P     MU_PHASE
+   0    +      0  1 SOLN-R_PH  // 1 FSstel R_PH     R_PHASE
+   0    +      0  1 SOLN-FZR2  // 1 FSstel FZR2     FEZR2_C16
+   0    +      0  1 SOLN-FZR3  // 1 FSstel FZR3     FEZR3_E1A
+   0    +      0  1 SOLN-CHIA  // 1 FSstel CHIA     CHI_A12
+   0    I      0  1 SOLN-LAV1  // 2 FSstel LAV1     LAVES_C14
+   0    I      0  1 SOLN-LAV3  // 2 FSstel LAV3     LAVES_C15
+   0    I      0  1 SOLN-LAV4  // 2 FSstel LAV4     LAVES_C36
+   0    +      0  1 SOLN-MC_E  // 1 FSstel MC_E     MC_ETA
+   0    +      0  1 SOLN-MC_S  // 1 FSstel MC_S     MC_SHP
+   0    I      0  1 SOLN-ALMO  // 2 FSstel ALMO     AlMo
+   0    +      0  1 SOLN-ACML  // 1 FSstel ACML     L-Al8(Cr,Mn)5
+   0    +      0  1 SOLN-ACMH  // 1 FSstel ACMH     H-Al8(Cr,Mn)5
+   0    I      0  1 SOLN-KAPP  // 2 FSstel KAPP     Kappa-Carbide
+   0    I      0  1 SOLN-L10   // 2 FSstel L10      AlTi
+   0    I      0  1 SOLN-D019  // 2 FSstel D019     AlTi3_D019
+   0    I      0  1 SOLN-ZETA  // 2 FSstel Zeta     Al5Ti2
+   0    I      0  1 SOLN-ETA   // 2 FSstel Eta      Al2Ti1
+   0    I      0  1 SOLN-EPSH  // 2 FSstel EpsH     Al3Ti-h
+   0    I      0  1 SOLN-EPSL  // 2 FSstel EpsL     Al3Ti-l
+   0    +      0  1 SOLN-TC23  // 1 FSstel TC23     C-TiCr2
+   0    +      0  1 SOLN-TAO2  // 1 FSstel Tao2     Tao2
+   0    +      0  1 SOLN-AC2   // 1 FSstel AC2      AlCr2
+   0    +      0  1 SOLN-A4C   // 1 FSstel A4C      Al4Cr
+   0    +      0  1 SOLN-A13F  // 1 FSstel A13F     Al13Fe4
+   0    I      0  1 SOLN-A8F5  // 2 FSstel A8F5     Al8Fe5
+   0    +      0  1 SOLN-TCF   // 1 FSstel TCF      Ti5(Cr,Fe)24
+   0    J      0  1 SOLN-L12   // 3 FSstel L12      L12!FCC_A1
+   0    +      0  1 SOLN-CR2B  // 1 FSstel Cr2B     Cr2B
+   0    +      0  1 SOLN-BETB  // 1 FSstel BetB     Beta_Rhombo_B
+   0    +      0  1 SOLN-M12Z  // 1 FSstel M12Z     (Al,Fe)12Zr
+   0    +      0  1 SOLN-NI3M  // 1 FSstel Ni3M     Ni3M
+SSEND
+ENDF-00001

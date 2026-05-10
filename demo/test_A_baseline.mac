@@ -1,0 +1,13 @@
+REM ===== Experiment A: Baseline Test =====
+VARIABLE %EquiFile %OutDir
+HIDE
+HIDE_MACRO
+
+%EquiFile = "D:\Nercar\Wuhu\Apps\factsage_app\inclusionprecipitation\demo\case.equi"
+%OutDir   = "D:\Nercar\Wuhu\Apps\factsage_app\inclusionprecipitation\demo\test_output\testA\"
+
+OPEN %EquiFile
+CALC
+SAVE "%OutDirEquiA.res"
+
+END

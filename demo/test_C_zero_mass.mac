@@ -1,0 +1,20 @@
+REM ===== Experiment C: SET REACTANT zero mass =====
+VARIABLE %EquiFile %OutDir
+HIDE
+HIDE_MACRO
+
+%EquiFile = "D:\Nercar\Wuhu\Apps\factsage_app\inclusionprecipitation\demo\case.equi"
+%OutDir   = "D:\Nercar\Wuhu\Apps\factsage_app\inclusionprecipitation\demo\test_output\testC\"
+
+OPEN %EquiFile
+
+REM Set W and Zr to 0 to simulate "no W/Zr" system
+REM Increase Fe to keep total 100g: Fe = 58.785 + 0.2 + 0.05 = 59.035g
+SET REACTANT W MASS 0
+SET REACTANT Zr MASS 0
+SET REACTANT Fe MASS 59.035
+
+CALC
+SAVE "%OutDirEquiC.res"
+
+END
