@@ -5,6 +5,12 @@
             "name": "高合金钢 夹杂/析出",
             "description": "高合金钢（含Cr/Ti/Al/Mo/W/Zr/B）的夹杂物和析出相计算",
             "directory": "high_alloy_incl"
+        },
+        {
+            "id": "bearing_steel_52100",
+            "name": "轴承钢 52100 / 100Cr6",
+            "description": "基于手工导出的 52100 / 100Cr6 轴承钢 FactSage Equilib 案例",
+            "directory": "bearing_steel_52100"
         }
     ]
 }

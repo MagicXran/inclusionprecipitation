@@ -1,0 +1,24 @@
+{
+    "id": "bearing_steel_52100",
+    "name": "轴承钢 52100 / 100Cr6",
+    "description": "基于手工导出的 52100 / 100Cr6 轴承钢 Equilib 案例。13元素体系，适合轴承钢夹杂物和碳化物/氮化物析出分析。",
+    "source_case": "demo/轴承钢_52100_100Cr6.equi",
+    "databases": ["FToxid (FT53)", "FSstel (ST53)", "FactPS (OX53)"],
+    "supported_elements": [
+        {"symbol": "Fe", "default_g": 97.0055, "required": true,  "active": true,  "group": "base",  "description": "铁（基体）"},
+        {"symbol": "C",  "default_g": 1.0,     "required": true,  "active": true,  "group": "base",  "description": "碳"},
+        {"symbol": "Cr", "default_g": 1.4,     "required": false, "active": true,  "group": "major", "description": "铬"},
+        {"symbol": "Si", "default_g": 0.25,    "required": false, "active": true,  "group": "major", "description": "硅"},
+        {"symbol": "Mn", "default_g": 0.3,     "required": false, "active": true,  "group": "major", "description": "锰"},
+        {"symbol": "Al", "default_g": 0.02,    "required": false, "active": true,  "group": "micro", "description": "铝"},
+        {"symbol": "N",  "default_g": 0.006,   "required": false, "active": true,  "group": "base",  "description": "氮"},
+        {"symbol": "O",  "default_g": 0.0008,  "required": false, "active": true,  "group": "base",  "description": "氧"},
+        {"symbol": "P",  "default_g": 0.01,    "required": false, "active": true,  "group": "trace", "description": "磷"},
+        {"symbol": "S",  "default_g": 0.005,   "required": false, "active": true,  "group": "trace", "description": "硫"},
+        {"symbol": "Ca", "default_g": 0.0005,  "required": false, "active": true,  "group": "trace", "description": "钙"},
+        {"symbol": "Mg", "default_g": 0.0002,  "required": false, "active": true,  "group": "trace", "description": "镁"},
+        {"symbol": "Ti", "default_g": 0.002,   "required": false, "active": true,  "group": "micro", "description": "钛"}
+    ],
+    "default_temp": {"start_c": 800, "end_c": 1600, "step_c": 10},
+    "default_pressure_atm": 1.0
+}

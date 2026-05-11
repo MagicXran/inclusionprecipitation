@@ -186,6 +186,7 @@ def render_job_files(
     mac_path.write_text(mac_text, encoding="utf-8", newline="")
 
     return {
+        "template_id": template_id,
         "job_dir": job_dir,
         "in_dir": in_dir,
         "out_dir": out_dir,

@@ -31,10 +31,10 @@ def _reactant_masses(equi_text):
     return {symbol: mass for mass, symbol in pairs}
 
 
-def _template_mass_placeholders():
+def _template_mass_placeholders(template_id="high_alloy_incl"):
     tpl_path = (
         Path(__file__).resolve().parent.parent
-        / "templates" / "high_alloy_incl" / "case.equi.tpl"
+        / "templates" / template_id / "case.equi.tpl"
     )
     text = tpl_path.read_text(encoding="utf-8-sig")
     return re.findall(r"\{\{MASS_([A-Z][a-z]?)\}\}", text)
@@ -52,6 +52,12 @@ class TestRegistry:
         reg = load_registry()
         ids = [t["id"] for t in reg["templates"]]
         assert "high_alloy_incl" in ids
+
+    def test_registry_has_bearing_steel_52100(self):
+        """应包含 52100/100Cr6 轴承钢案例模板。"""
+        reg = load_registry()
+        ids = [t["id"] for t in reg["templates"]]
+        assert "bearing_steel_52100" in ids
 
 
 class TestTemplateMeta:
@@ -93,6 +99,17 @@ class TestTemplateMeta:
         """不存在的模板应抛出 FileNotFoundError"""
         with pytest.raises(FileNotFoundError):
             load_template_meta("nonexistent_template")
+
+    def test_bearing_steel_meta_matches_case_template(self):
+        """轴承钢模板应由 demo .equi 参数化而来，meta 与占位符一一对应。"""
+        meta = load_template_meta("bearing_steel_52100")
+        symbols = [e["symbol"] for e in meta["supported_elements"]]
+        placeholders = _template_mass_placeholders("bearing_steel_52100")
+
+        assert meta["id"] == "bearing_steel_52100"
+        assert symbols == ["Fe", "C", "Cr", "Si", "Mn", "Al", "N", "O", "P", "S", "Ca", "Mg", "Ti"]
+        assert len(symbols) == len(set(symbols)) == 13
+        assert set(placeholders) == set(symbols)
 
 
 class TestJobRequestValidation:
@@ -269,6 +286,40 @@ class TestRenderJobFiles:
         with pytest.raises(ValueError, match="不支持元素"):
             render_job_files("test007", "high_alloy_incl", elements, temp_range)
 
+    def test_render_bearing_steel_52100_template(self, tmp_path, monkeypatch):
+        """轴承钢案例应能渲染出完整反应物质量和温度参数。"""
+        from app.config import settings
+        monkeypatch.setattr(type(settings), "work_root", property(lambda self: tmp_path))
+
+        elements = [
+            {"symbol": "Fe", "mass_g": 97.0055},
+            {"symbol": "C", "mass_g": 1.0},
+            {"symbol": "Cr", "mass_g": 1.4},
+            {"symbol": "Si", "mass_g": 0.25},
+            {"symbol": "Mn", "mass_g": 0.3},
+            {"symbol": "Al", "mass_g": 0.02},
+            {"symbol": "N", "mass_g": 0.006},
+            {"symbol": "O", "mass_g": 0.0008},
+            {"symbol": "P", "mass_g": 0.01},
+            {"symbol": "S", "mass_g": 0.005},
+            {"symbol": "Ca", "mass_g": 0.0005},
+            {"symbol": "Mg", "mass_g": 0.0002},
+            {"symbol": "Ti", "mass_g": 0.002},
+        ]
+        temp_range = {"start_c": 800, "end_c": 1600, "step_c": 10, "pressure_atm": 1.0}
+
+        paths = render_job_files("test_bearing_52100", "bearing_steel_52100", elements, temp_range)
+        content = paths["equi_path"].read_text(encoding="utf-8")
+        reactants = _reactant_masses(content)
+
+        assert len(reactants) == 13
+        assert reactants["Fe"] == "97.0055"
+        assert reactants["C"] == "1.0"
+        assert reactants["Cr"] == "1.4"
+        assert "'800 1600 10'" in content
+        assert "{{" not in content
+        assert paths["template_id"] == "bearing_steel_52100"
+
 
 class TestMockCalculation:
     def test_mock_uses_demo_res_species(self, tmp_path):
@@ -282,6 +333,56 @@ class TestMockCalculation:
         assert result["n_steps"] == 94
         assert len(result["species"]) == 1686
         assert len(significant) > 5
+
+    def test_mock_uses_template_specific_res_for_bearing_steel(self, tmp_path):
+        """轴承钢模板的 mock 结果应来自 Equ2222i.res，确保 species/图表跟该案例一致。"""
+        paths = {
+            "out_dir": tmp_path / "out",
+            "template_id": "bearing_steel_52100",
+        }
+
+        result_path = asyncio.run(_mock_calculation(paths))
+        result = json.loads(result_path.read_text(encoding="utf-8"))
+        significant = [s for s in result["species"] if s["max_gram"] >= 1e-8]
+
+        assert result["n_steps"] == 26
+        assert len(result["species"]) == 2762
+        assert result["temperatures"][0] == 1000.0
+        assert result["temperatures"][-1] == 1600.0
+        assert len(significant) >= 50
+
+    def test_render_paths_feed_template_specific_mock_selection(self, tmp_path, monkeypatch):
+        """真实调用链里 render_job_files 返回的 paths 必须带 template_id，否则 mock 会错误回退到通用 res。"""
+        from app.config import settings
+        monkeypatch.setattr(type(settings), "work_root", property(lambda self: tmp_path))
+
+        elements = [
+            {"symbol": "Fe", "mass_g": 97.0055},
+            {"symbol": "C", "mass_g": 1.0},
+            {"symbol": "Cr", "mass_g": 1.4},
+            {"symbol": "Si", "mass_g": 0.25},
+            {"symbol": "Mn", "mass_g": 0.3},
+            {"symbol": "Al", "mass_g": 0.02},
+            {"symbol": "N", "mass_g": 0.006},
+            {"symbol": "O", "mass_g": 0.0008},
+            {"symbol": "P", "mass_g": 0.01},
+            {"symbol": "S", "mass_g": 0.005},
+            {"symbol": "Ca", "mass_g": 0.0005},
+            {"symbol": "Mg", "mass_g": 0.0002},
+            {"symbol": "Ti", "mass_g": 0.002},
+        ]
+        paths = render_job_files(
+            "test_bearing_52100_mock",
+            "bearing_steel_52100",
+            elements,
+            {"start_c": 800, "end_c": 1600, "step_c": 10, "pressure_atm": 1.0},
+        )
+
+        result_path = asyncio.run(_mock_calculation(paths))
+        result = json.loads(result_path.read_text(encoding="utf-8"))
+
+        assert result["n_steps"] == 26
+        assert len(result["species"]) == 2762
 
 
 if __name__ == "__main__":

@@ -100,7 +100,7 @@ async def _mock_calculation(paths: Dict[str, Any]) -> Path:
     result_path = paths["out_dir"] / "parsed_result.json"
     result_path.parent.mkdir(parents=True, exist_ok=True)
 
-    demo_res = _find_demo_res()
+    demo_res = _find_demo_res(paths.get("template_id"))
     if not demo_res.exists():
         raise FileNotFoundError(f"Mock 结果文件不存在: {demo_res}")
 
@@ -111,13 +111,23 @@ async def _mock_calculation(paths: Dict[str, Any]) -> Path:
     return result_path
 
 
-def _find_demo_res() -> Path:
-    """定位开发环境中的 demo/Equi2.res。"""
-    candidates = [
-        settings.templates_dir.parent.parent / "demo" / "Equi2.res",
-        settings.templates_dir.parent / "demo" / "Equi2.res",
+def _find_demo_res(template_id: str | None = None) -> Path:
+    """按模板优先选择 demo .res；找不到时回退到通用 Equi2.res。"""
+    demo_dirs = [
+        settings.templates_dir.parent.parent / "demo",
+        settings.templates_dir.parent / "demo",
     ]
-    for path in candidates:
-        if path.exists():
-            return path
-    return candidates[0]
+    preferred_names: list[str] = []
+
+    if template_id == "bearing_steel_52100":
+        preferred_names.append("Equ2222i.res")
+
+    preferred_names.append("Equi2.res")
+
+    for demo_dir in demo_dirs:
+        for name in preferred_names:
+            path = demo_dir / name
+            if path.exists():
+                return path
+
+    return demo_dirs[0] / preferred_names[0]

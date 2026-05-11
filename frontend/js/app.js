@@ -7,6 +7,7 @@ let currentJobId = null;
 let speciesList = [];
 let chartInstance = null;
 let pollingTimer = null;
+let currentTemplateId = 'high_alloy_incl';
 
 const DEFAULT_TEMPLATE_ID = 'high_alloy_incl';
 const DEFAULT_SPECIES_MIN_GRAM = 1e-8;
@@ -18,11 +19,18 @@ const STATUS_LABELS = {
     failed:    '失败',
 };
 
+const OVERLAY_STATUS_TEXT = {
+    submitting: '提交任务中',
+    pending:    '等待计算队列',
+    running:    'FactSage 计算中',
+    loading:    '正在加载结果',
+};
+
 // ---- 初始化 ----
 document.addEventListener('DOMContentLoaded', () => {
     chartInstance = echarts.init(document.getElementById('chart'));
     normalizeTemplateCard();
-    loadTemplateMeta(DEFAULT_TEMPLATE_ID);
+    loadTemplates();
     loadHistory();
     checkMockMode();
 
@@ -33,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function normalizeTemplateCard() {
-    if (document.getElementById('templateName')) return;
+    if (document.getElementById('templateName') && document.getElementById('templateSelect')) return;
 
     const legacySelect = document.getElementById('templateSelect');
     const card = legacySelect ? legacySelect.closest('.card') : null;
@@ -41,6 +49,10 @@ function normalizeTemplateCard() {
 
     card.innerHTML = `
         <h2 class="card-title">计算体系</h2>
+        <select id="templateSelect" class="input-full template-select" autocomplete="off"
+                onchange="onTemplateChange(this.value)" disabled>
+            <option value="">正在加载计算体系...</option>
+        </select>
         <div id="templateName" class="template-name">高合金钢 夹杂/析出</div>
         <p id="templateDesc" class="template-desc"></p>
     `;
@@ -101,11 +113,36 @@ function renderSpeciesThresholdOptions(speciesFilter) {
         .join('');
 }
 
+// 加载模板列表
+async function loadTemplates() {
+    try {
+        const resp = await apiFetch('/api/templates');
+        const templates = await resp.json();
+        const select = document.getElementById('templateSelect');
+        if (select) {
+            select.innerHTML = templates
+                .map(t => `<option value="${t.id}">${t.name}</option>`)
+                .join('');
+            const hasDefault = templates.some(t => t.id === currentTemplateId);
+            currentTemplateId = hasDefault ? currentTemplateId : (templates[0]?.id || DEFAULT_TEMPLATE_ID);
+            select.value = currentTemplateId;
+            select.disabled = false;
+        }
+        await loadTemplateMeta(currentTemplateId);
+    } catch (err) {
+        showError('加载模板列表失败：' + err.message);
+        await loadTemplateMeta(currentTemplateId);
+    }
+}
+
 // 加载模板元信息，填充元素输入
 async function loadTemplateMeta(templateId) {
     try {
         const resp = await apiFetch(`/api/templates/${templateId}`);
         const meta = await resp.json();
+        currentTemplateId = templateId;
+        const select = document.getElementById('templateSelect');
+        if (select) select.value = templateId;
 
         // 填充元素输入
         renderElementInputs(meta.supported_elements);
@@ -131,6 +168,19 @@ async function loadTemplateMeta(templateId) {
     } catch (err) {
         showError('加载模板详情失败：' + err.message);
     }
+}
+
+async function onTemplateChange(templateId) {
+    if (!templateId || templateId === currentTemplateId) return;
+
+    currentJobId = null;
+    speciesList = [];
+    hideError();
+    clearStatus();
+    renderSpeciesList([]);
+    if (chartInstance) chartInstance.clear();
+    document.getElementById('submitBtn').disabled = true;
+    await loadTemplateMeta(templateId);
 }
 
 // 提交计算
@@ -182,7 +232,7 @@ async function submitCalculation() {
     }
 
     const body = {
-        template_id: DEFAULT_TEMPLATE_ID,
+        template_id: currentTemplateId,
         elements: elements,
         temp_range: {
             start_c: startC,
@@ -198,6 +248,7 @@ async function submitCalculation() {
     btn.classList.add('loading');
     btn.textContent = '计算中...';
     hideError();
+    showCalculationOverlay(null, 'submitting');
 
     try {
         const resp = await apiFetch('/api/calculate', {
@@ -207,11 +258,13 @@ async function submitCalculation() {
         });
         const result = await resp.json();
         currentJobId = result.job_id;
+        showCalculationOverlay(result.job_id, result.status);
         updateStatus(result.status);
         pollJobStatus(result.job_id);
     } catch (err) {
         showError('提交计算失败：' + err.message);
         resetSubmitBtn();
+        hideCalculationOverlay();
     }
 }
 
@@ -224,17 +277,24 @@ function pollJobStatus(jobId) {
             const resp = await apiFetch(`/api/jobs/${jobId}`);
             const job = await resp.json();
             updateStatus(job.status, job.error);
+            setCalculationOverlayStatus(job.status);
 
             if (job.status === 'completed') {
                 clearInterval(pollingTimer);
                 pollingTimer = null;
                 resetSubmitBtn();
-                await loadSpeciesList(jobId);
-                loadHistory();
+                setCalculationOverlayStatus('loading');
+                try {
+                    await loadSpeciesList(jobId);
+                    loadHistory();
+                } finally {
+                    hideCalculationOverlay();
+                }
             } else if (job.status === 'failed') {
                 clearInterval(pollingTimer);
                 pollingTimer = null;
                 resetSubmitBtn();
+                hideCalculationOverlay();
                 showError(job.error || '计算失败，未知错误。');
                 loadHistory();
             }
@@ -242,6 +302,7 @@ function pollJobStatus(jobId) {
             clearInterval(pollingTimer);
             pollingTimer = null;
             resetSubmitBtn();
+            hideCalculationOverlay();
             showError('查询任务状态失败：' + err.message);
         }
     }, 2000);
@@ -595,9 +656,11 @@ function buildChartOption(data, valueType) {
             confine: true,
             formatter: function (params) {
                 if (!params.length) return '';
-                let html = `<strong>${params[0].axisValueLabel} °C</strong><br>`;
+                const xValue = Array.isArray(params[0].value) ? params[0].value[0] : params[0].axisValue;
+                let html = `<strong>${formatNumber(xValue)} °C</strong><br>`;
                 params.forEach(p => {
-                    html += `${p.marker} ${p.seriesName}: <strong>${formatNumber(p.value)}</strong><br>`;
+                    const yValue = Array.isArray(p.value) ? p.value[1] : p.value;
+                    html += `${p.marker} ${p.seriesName}: <strong>${formatNumber(yValue)}</strong><br>`;
                 });
                 return html;
             },
@@ -605,9 +668,8 @@ function buildChartOption(data, valueType) {
         legend: { type: 'scroll', bottom: 0 },
         grid: { left: 80, right: 30, top: 60, bottom: 80 },
         xAxis: {
-            type: 'category',
+            type: 'value',
             name: '温度 (°C)',
-            data: data.temperatures,
             nameLocation: 'middle',
             nameGap: 30,
         },
@@ -631,8 +693,8 @@ function buildChartOption(data, valueType) {
         series: data.series.map(s => ({
             name: s.display_name || s.name,
             type: 'line',
-            data: s.data,
-            smooth: true,
+            data: data.temperatures.map((temp, idx) => [temp, s.data[idx] ?? 0]),
+            smooth: false,
             showSymbol: false,
             emphasis: { focus: 'series' },
         })),
@@ -652,6 +714,17 @@ function updateStatus(status, error) {
     if (status === 'failed' && error) {
         showError(error);
     }
+}
+
+function clearStatus() {
+    const container = document.getElementById('statusIndicator');
+    const badge = document.getElementById('statusBadge');
+    const text = document.getElementById('statusText');
+    if (!container || !badge || !text) return;
+
+    container.style.display = 'none';
+    badge.className = 'status-badge';
+    text.textContent = '';
 }
 
 // ============================================
@@ -745,6 +818,35 @@ function resetSubmitBtn() {
     btn.disabled = false;
     btn.classList.remove('loading');
     btn.textContent = '开始计算';
+}
+
+function showCalculationOverlay(jobId, status) {
+    const overlay = document.getElementById('calculationOverlay');
+    const jobEl = document.getElementById('calculationOverlayJobId');
+    if (!overlay || !jobEl) return;
+
+    jobEl.textContent = jobId || '等待生成';
+    setCalculationOverlayStatus(status || 'submitting');
+    document.body.classList.add('calculation-overlay-open');
+    overlay.hidden = false;
+    overlay.setAttribute('aria-hidden', 'false');
+    overlay.focus();
+}
+
+function hideCalculationOverlay() {
+    const overlay = document.getElementById('calculationOverlay');
+    if (!overlay) return;
+
+    overlay.hidden = true;
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('calculation-overlay-open');
+}
+
+function setCalculationOverlayStatus(status) {
+    const statusEl = document.getElementById('calculationOverlayStatus');
+    if (!statusEl) return;
+
+    statusEl.textContent = OVERLAY_STATUS_TEXT[status] || STATUS_LABELS[status] || '处理中';
 }
 
 function showError(msg) {

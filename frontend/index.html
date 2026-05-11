@@ -20,6 +20,10 @@
             <!-- 当前计算体系 -->
             <section class="card">
                 <h2 class="card-title">计算体系</h2>
+                <select id="templateSelect" class="input-full template-select" autocomplete="off"
+                        onchange="onTemplateChange(this.value)" disabled>
+                    <option value="">正在加载计算体系...</option>
+                </select>
                 <div id="templateName" class="template-name">高合金钢 夹杂/析出</div>
                 <p id="templateDesc" class="template-desc"></p>
             </section>
@@ -127,6 +131,20 @@
             </div>
         </section>
     </main>
+
+    <div id="calculationOverlay" class="calculation-overlay" role="dialog" aria-modal="true"
+         aria-labelledby="calculationOverlayTitle" aria-describedby="calculationOverlayStatus"
+         aria-hidden="true" tabindex="-1" hidden>
+        <div class="calculation-overlay-card">
+            <div class="calculation-spinner" aria-hidden="true"></div>
+            <h2 id="calculationOverlayTitle" class="calculation-overlay-title">正在计算，请稍候</h2>
+            <p id="calculationOverlayStatus" class="calculation-overlay-status">提交任务中</p>
+            <p id="calculationOverlayJob" class="calculation-overlay-job">
+                任务 ID：<span id="calculationOverlayJobId">等待生成</span>
+            </p>
+            <p class="calculation-overlay-hint">计算完成或失败后会自动返回页面。</p>
+        </div>
+    </div>
 
     <script src="js/app.js"></script>
 </body>
