@@ -11,7 +11,7 @@ comments
 'O' '3'
 'ISOP' '0' ''
 'R' 'NEW'
- 97.0055 Fe  +  1.0 C  +  1.4 Cr  +  0.25 Si  + 
+ 97.0055 Fe  +  C  +  1.4 Cr  +  0.25 Si  + 
 'I' '   '
  (1000.00,1,s1-FactPS,#1) (1000.00,1,s1-FactPS,#1) (1000.00,1,s-FactPS,#1) (1000.00,1,s-FactPS,#1)
 'R' 'NEW'
@@ -27,7 +27,7 @@ comments
 'I' '   '
  (1000.00,1,s1-FactPS,#1)
 'F' 'WIN'
- 'T' '1000.0 1600.0 50.0' 'P' '1.0' 'DH' ''
+ 'T' '800 1600 10' 'P' '1' 'DH' ''
 'DAT1' ' 3'
 FT53 ST53 OX53 
 'DAT2' ' 2'
@@ -497,40 +497,40 @@ GRIDEND
    0    +      0  1 SOLN-TAUA  // 1 FSstel TAUA     alpha_Al16(Fe,Mn)4Si1(Al,Si)2
    0    +      0  1 SOLN-TAUB  // 1 FSstel TAUB     Beta_Al15Si1(Al,Si)4(Fe,Mn)6
    0    I      0  1 SOLN-KAPP  // 2 FSstel KAPP     Kappa-Carbide
-   0    +      0  1 SOLN-M8SC  // 1 FSstel M8Si2C1
-   0    +      0  1 SOLN-M5SC  // 1 FSstel M5Si1C1
-   0    +      0  1 SOLN-D88_  // 1 FSstel D88_M5Si3
-   0    +      0  1 SOLN-TAU2  // 1 FSstel Tau2_Al5Fe2Si2
-   0    +      0  1 SOLN-TAU4  // 1 FSstel Tau4_Al3Fe1Si2
-   0    +      0  1 SOLN-M11S  // 1 FSstel (Mn)11(Si,Al)19
-   0    +      0  1 SOLN-AL11  // 1 FSstel HTAl11Mn4-oP156
-   0    +      0  1 SOLN-FS2L  // 1 FSstel Fe1Si2
-   0    +      0  1 SOLN-FS2H  // 1 FSstel Fe3Si7
-   0    I      0  1 SOLN-L10   // 2 FSstel AlTi
-   0    I      0  1 SOLN-D019  // 2 FSstel AlTi3_D019
-   0    I      0  1 SOLN-ZETA  // 2 FSstel Al5Ti2
-   0    I      0  1 SOLN-ETA   // 2 FSstel Al2Ti1
-   0    I      0  1 SOLN-EPSH  // 2 FSstel Al3Ti-h
-   0    I      0  1 SOLN-EPSL  // 2 FSstel Al3Ti-l
-   0    +      0  1 SOLN-TC23  // 1 FSstel C-TiCr2
-   0    +      0  1 SOLN-TAO2  // 1 FSstel Tao2
-   0    +      0  1 SOLN-MEP   // 1 FSstel MeP
-   0    I      0  1 SOLN-ALP   // 2 FSstel AlP
-   0    +      0  1 SOLN-A3M2  // 1 FSstel Beta_Al3Mg2
-   0    +      0  1 SOLN-GAAM  // 1 FSstel Gamma_Al12Mg17
-   0    +      0  1 SOLN-AC2   // 1 FSstel AlCr2
-   0    +      0  1 SOLN-A4C   // 1 FSstel Al4Cr
-   0    +      0  1 SOLN-A7CR  // 1 FSstel Al7(Cr,Mn)
-   0    +      0  1 SOLN-A11C  // 1 FSstel Al11(Cr,Mn)2
-   0    +      0  1 SOLN-A5F2  // 1 FSstel Al5Fe2
-   0    +      0  1 SOLN-A13F  // 1 FSstel Al13Fe4
-   0    I      0  1 SOLN-A8F5  // 2 FSstel Al8Fe5
-   0    +      0  1 SOLN-TCF   // 1 FSstel Ti5(Cr,Fe)24
-   0    +      0  1 SOLN-PYRR  // 1 FSstel Pyrrhotite
-   0    I      0  1 SOLN-MS-C  // 2 FSstel MeS_cubic
-   0    J      0  1 SOLN-L12   // 3 FSstel L12!FCC_A1
-   0    +      0  1 SOLN-SICN  // 1 FSstel SiC
-   0    +      0  1 SOLN-MNTI  // 1 FSstel MnTi
-   0    +      0  1 SOLN-NI3M  // 1 FSstel Ni3M
+   0    +      0  1 SOLN-M8SC  // 1 FSstel M8SC     M8Si2C1
+   0    +      0  1 SOLN-M5SC  // 1 FSstel M5SC     M5Si1C1
+   0    +      0  1 SOLN-D88_  // 1 FSstel D88_     D88_M5Si3
+   0    +      0  1 SOLN-TAU2  // 1 FSstel TAU2     Tau2_Al5Fe2Si2
+   0    +      0  1 SOLN-TAU4  // 1 FSstel TAU4     Tau4_Al3Fe1Si2
+   0    +      0  1 SOLN-M11S  // 1 FSstel M11S     (Mn)11(Si,Al)19
+   0    +      0  1 SOLN-AL11  // 1 FSstel AL11     HTAl11Mn4-oP156
+   0    +      0  1 SOLN-FS2L  // 1 FSstel FS2L     Fe1Si2
+   0    +      0  1 SOLN-FS2H  // 1 FSstel FS2H     Fe3Si7
+   0    I      0  1 SOLN-L10   // 2 FSstel L10      AlTi
+   0    I      0  1 SOLN-D019  // 2 FSstel D019     AlTi3_D019
+   0    I      0  1 SOLN-ZETA  // 2 FSstel Zeta     Al5Ti2
+   0    I      0  1 SOLN-ETA   // 2 FSstel Eta      Al2Ti1
+   0    I      0  1 SOLN-EPSH  // 2 FSstel EpsH     Al3Ti-h
+   0    I      0  1 SOLN-EPSL  // 2 FSstel EpsL     Al3Ti-l
+   0    +      0  1 SOLN-TC23  // 1 FSstel TC23     C-TiCr2
+   0    +      0  1 SOLN-TAO2  // 1 FSstel Tao2     Tao2
+   0    +      0  1 SOLN-MEP   // 1 FSstel MeP      MeP
+   0    I      0  1 SOLN-ALP   // 2 FSstel AlP      AlP
+   0    +      0  1 SOLN-A3M2  // 1 FSstel A3M2     Beta_Al3Mg2
+   0    +      0  1 SOLN-GAAM  // 1 FSstel GAAM     Gamma_Al12Mg17
+   0    +      0  1 SOLN-AC2   // 1 FSstel AC2      AlCr2
+   0    +      0  1 SOLN-A4C   // 1 FSstel A4C      Al4Cr
+   0    +      0  1 SOLN-A7CR  // 1 FSstel A7CR     Al7(Cr,Mn)
+   0    +      0  1 SOLN-A11C  // 1 FSstel A11C     Al11(Cr,Mn)2
+   0    +      0  1 SOLN-A5F2  // 1 FSstel A5F2     Al5Fe2
+   0    +      0  1 SOLN-A13F  // 1 FSstel A13F     Al13Fe4
+   0    I      0  1 SOLN-A8F5  // 2 FSstel A8F5     Al8Fe5
+   0    +      0  1 SOLN-TCF   // 1 FSstel TCF      Ti5(Cr,Fe)24
+   0    +      0  1 SOLN-PYRR  // 1 FSstel PYRR     Pyrrhotite
+   0    I      0  1 SOLN-MS-C  // 2 FSstel MS-c     MeS_cubic
+   0    J      0  1 SOLN-L12   // 3 FSstel L12      L12!FCC_A1
+   0    +      0  1 SOLN-SICN  // 1 FSstel SiCN     SiC
+   0    +      0  1 SOLN-MNTI  // 1 FSstel MnTi     MnTi
+   0    +      0  1 SOLN-NI3M  // 1 FSstel Ni3M     Ni3M
 SSEND
 ENDF-00001

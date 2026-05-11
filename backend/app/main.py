@@ -8,7 +8,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 
 from .config import settings
@@ -58,10 +58,21 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 
 app.include_router(jobs.router)
 
+
+@app.get("/favicon.ico", include_in_schema=False)
+async def favicon():
+    return Response(status_code=204)
+
 _FE = settings.frontend_dir
 if _FE.exists():
-    app.mount("/css", StaticFiles(directory=_FE / "css"), name="css")
-    app.mount("/js", StaticFiles(directory=_FE / "js"), name="js")
+    for static_name in ("css", "js", "vendor"):
+        static_dir = _FE / static_name
+        if static_dir.exists():
+            app.mount(
+                f"/{static_name}",
+                StaticFiles(directory=static_dir),
+                name=static_name,
+            )
 
     @app.get("/")
     async def index():
