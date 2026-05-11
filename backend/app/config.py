@@ -33,6 +33,10 @@ _DEFAULT_CONFIG: Dict[str, Any] = {
         "results_dir": "./results",
     },
     "mock": {"enabled": "auto", "delay_seconds": 2.0},
+    "species_filter": {
+        "default_min_gram": 1e-8,
+        "options": [1e-10, 1e-8, 1e-6, 1e-4],
+    },
 }
 
 
@@ -137,6 +141,14 @@ class Settings:
     @property
     def mock_delay(self) -> float:
         return float(self._cfg["mock"]["delay_seconds"])
+
+    @property
+    def default_species_min_gram(self) -> float:
+        return float(self._cfg["species_filter"]["default_min_gram"])
+
+    @property
+    def species_min_gram_options(self) -> list[float]:
+        return [float(v) for v in self._cfg["species_filter"]["options"]]
 
 
 settings = Settings()

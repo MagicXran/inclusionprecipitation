@@ -23,6 +23,7 @@ from ..models import (
     SpeciesListItem,
 )
 from ..services.job_manager import job_manager
+from ..services.res_parser import filter_species_by_min_gram
 from ..services.template_renderer import load_registry, load_template_meta
 
 logger = logging.getLogger(__name__)
@@ -92,7 +93,14 @@ async def get_job(job_id: str) -> JobResponse:
 
 
 @router.get("/jobs/{job_id}/species")
-async def get_species(job_id: str) -> List[SpeciesListItem]:
+async def get_species(
+    job_id: str,
+    min_gram: float = Query(
+        settings.default_species_min_gram,
+        ge=0,
+        description="按物种最大质量过滤，单位 g",
+    ),
+) -> List[SpeciesListItem]:
     """获取物种列表（轻量，不含数据序列）"""
     result = job_manager.get_parsed_result(job_id)
     if result is None:
@@ -104,9 +112,7 @@ async def get_species(job_id: str) -> List[SpeciesListItem]:
         raise HTTPException(status_code=404, detail="结果文件不存在")
 
     items = []
-    for s in result["species"]:
-        if s["max_gram"] < 1e-8:
-            continue
+    for s in filter_species_by_min_gram(result["species"], min_gram):
         items.append(SpeciesListItem(
             name=s["name"],
             display_name=s["display_name"],
@@ -202,6 +208,11 @@ async def download_result(job_id: str):
 async def export_csv(
     job_id: str,
     value_type: str = Query("gram", description="数据类型"),
+    min_gram: float = Query(
+        settings.default_species_min_gram,
+        ge=0,
+        description="按物种最大质量过滤，单位 g",
+    ),
 ):
     """导出选中的数据为 CSV"""
     result = job_manager.get_parsed_result(job_id)
@@ -217,8 +228,8 @@ async def export_csv(
     }
     data_key = type_map.get(value_type, "grams")
 
-    # 只导出有意义的物种
-    significant = [s for s in result["species"] if s["max_gram"] >= 1e-8]
+    # 只导出达到当前阈值的物种
+    significant = filter_species_by_min_gram(result["species"], min_gram)
     significant.sort(key=lambda x: x["max_gram"], reverse=True)
 
     buf = io.StringIO()
@@ -267,4 +278,8 @@ async def config_info():
         "mock_mode": settings.mock_mode,
         "factsage_dir": str(settings.factsage_dir),
         "templates_dir": str(settings.templates_dir),
+        "species_filter": {
+            "default_min_gram": settings.default_species_min_gram,
+            "options": settings.species_min_gram_options,
+        },
     }

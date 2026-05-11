@@ -10,7 +10,12 @@ import pytest
 # 确保能导入 backend
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from app.services.res_parser import ResParser, parse_res_file
+from app.config import Settings
+from app.services.res_parser import (
+    filter_species_by_min_gram,
+    parsed_result_to_dict,
+    parse_res_file,
+)
 
 DEMO_RES = Path(__file__).resolve().parent.parent.parent / "demo" / "Equi2.res"
 
@@ -55,6 +60,40 @@ class TestSpecies:
         """过滤后应有 50-200 个有意义物种"""
         significant = [s for s in parsed.species if s.max_gram >= 1e-8]
         assert 10 <= len(significant) <= 500
+
+    def test_serialized_result_keeps_all_species_for_api_filtering(self, parsed):
+        """序列化结果应保留全部 species，由 API 层过滤 gram=0 物种。"""
+        result = parsed_result_to_dict(parsed)
+        significant = [s for s in result["species"] if s["max_gram"] >= 1e-8]
+
+        assert len(result["species"]) == 1686
+        assert len(significant) > 5
+
+    def test_species_filter_threshold_is_configurable(self):
+        """物种过滤阈值应可配置，不能把 1e-8 写死在路由里。"""
+        species = [
+            {"name": "trace", "max_gram": 1e-10},
+            {"name": "default-visible", "max_gram": 1e-8},
+            {"name": "large", "max_gram": 1e-6},
+        ]
+
+        assert [s["name"] for s in filter_species_by_min_gram(species, 1e-8)] == [
+            "default-visible",
+            "large",
+        ]
+        assert [s["name"] for s in filter_species_by_min_gram(species, 1e-10)] == [
+            "trace",
+            "default-visible",
+            "large",
+        ]
+
+    def test_default_species_filter_threshold_comes_from_settings(self):
+        """默认展示阈值来自配置层，前后端共享同一个语义。"""
+        settings = Settings()
+
+        assert settings.default_species_min_gram == 1e-8
+        assert 1e-10 in settings.species_min_gram_options
+        assert 1e-8 in settings.species_min_gram_options
 
     def test_liquid_phase_exists(self, parsed):
         """应存在 Liquid 相"""

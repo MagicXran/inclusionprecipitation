@@ -1,0 +1,205 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - heading "FactSage 夹杂物/析出相计算系统" [level=1] [ref=e3]
+    - generic [ref=e4]: 模拟模式
+  - main [ref=e5]:
+    - complementary [ref=e6]:
+      - generic [ref=e7]:
+        - heading "计算体系" [level=2] [ref=e8]
+        - generic [ref=e9]: 高合金钢 夹杂/析出
+        - paragraph [ref=e10]: 适用于含Cr/Ti/Al等高合金钢的夹杂物和析出相温度扫描计算。22元素体系
+      - generic [ref=e11]:
+        - generic [ref=e12]:
+          - heading "元素组成" [level=2] [ref=e13]
+          - generic [ref=e14]: "总质量: 100.005 g"
+        - generic [ref=e15]:
+          - generic [ref=e16]:
+            - generic [ref=e17]: 基体 / 间隙元素
+            - generic [ref=e18]:
+              - checkbox "必选元素，不可关闭" [checked] [disabled] [ref=e19]
+              - generic [ref=e20]: Fe
+              - spinbutton [ref=e21]: "56.445"
+              - generic [ref=e22]: g
+            - generic [ref=e23]:
+              - checkbox "必选元素，不可关闭" [checked] [disabled] [ref=e24]
+              - generic [ref=e25]: O
+              - spinbutton [ref=e26]: "0.01"
+              - generic [ref=e27]: g
+            - generic [ref=e28]:
+              - checkbox "启用/禁用此元素" [checked] [ref=e29] [cursor=pointer]
+              - generic [ref=e30]: C
+              - spinbutton [ref=e31]: "0.35"
+              - generic [ref=e32]: g
+            - generic [ref=e33]:
+              - checkbox "启用/禁用此元素" [ref=e34] [cursor=pointer]
+              - generic [ref=e35]: "N"
+              - spinbutton [disabled] [ref=e36]: "1e-10"
+              - generic [ref=e37]: g
+          - generic [ref=e38]:
+            - generic [ref=e39]: 主合金元素
+            - generic [ref=e40]:
+              - checkbox "启用/禁用此元素" [checked] [ref=e41] [cursor=pointer]
+              - generic [ref=e42]: Cr
+              - spinbutton [ref=e43]: "32"
+              - generic [ref=e44]: g
+            - generic [ref=e45]:
+              - checkbox "启用/禁用此元素" [checked] [ref=e46] [cursor=pointer]
+              - generic [ref=e47]: Mo
+              - spinbutton [ref=e48]: "0.8"
+              - generic [ref=e49]: g
+            - generic [ref=e50]:
+              - checkbox "启用/禁用此元素" [ref=e51] [cursor=pointer]
+              - generic [ref=e52]: W
+              - spinbutton [disabled] [ref=e53]: "1e-10"
+              - generic [ref=e54]: g
+            - generic [ref=e55]:
+              - checkbox "启用/禁用此元素" [ref=e56] [cursor=pointer]
+              - generic [ref=e57]: Si
+              - spinbutton [disabled] [ref=e58]: "1e-10"
+              - generic [ref=e59]: g
+            - generic [ref=e60]:
+              - checkbox "启用/禁用此元素" [ref=e61] [cursor=pointer]
+              - generic [ref=e62]: Mn
+              - spinbutton [disabled] [ref=e63]: "1e-10"
+              - generic [ref=e64]: g
+            - generic [ref=e65]:
+              - checkbox "启用/禁用此元素" [ref=e66] [cursor=pointer]
+              - generic [ref=e67]: Ni
+              - spinbutton [disabled] [ref=e68]: "1e-10"
+              - generic [ref=e69]: g
+          - generic [ref=e70]:
+            - generic [ref=e71]: 微合金元素
+            - generic [ref=e72]:
+              - checkbox "启用/禁用此元素" [checked] [ref=e73] [cursor=pointer]
+              - generic [ref=e74]: Ti
+              - spinbutton [ref=e75]: "8"
+              - generic [ref=e76]: g
+            - generic [ref=e77]:
+              - checkbox "启用/禁用此元素" [checked] [ref=e78] [cursor=pointer]
+              - generic [ref=e79]: Al
+              - spinbutton [ref=e80]: "2.4"
+              - generic [ref=e81]: g
+            - generic [ref=e82]:
+              - checkbox "启用/禁用此元素" [ref=e83] [cursor=pointer]
+              - generic [ref=e84]: B
+              - spinbutton [disabled] [ref=e85]: "1e-10"
+              - generic [ref=e86]: g
+            - generic [ref=e87]:
+              - checkbox "启用/禁用此元素" [ref=e88] [cursor=pointer]
+              - generic [ref=e89]: Zr
+              - spinbutton [disabled] [ref=e90]: "1e-10"
+              - generic [ref=e91]: g
+            - generic [ref=e92]:
+              - checkbox "启用/禁用此元素" [ref=e93] [cursor=pointer]
+              - generic [ref=e94]: V
+              - spinbutton [disabled] [ref=e95]: "1e-10"
+              - generic [ref=e96]: g
+            - generic [ref=e97]:
+              - checkbox "启用/禁用此元素" [ref=e98] [cursor=pointer]
+              - generic [ref=e99]: Nb
+              - spinbutton [disabled] [ref=e100]: "1e-10"
+              - generic [ref=e101]: g
+          - generic [ref=e102]:
+            - generic [ref=e103]: 痕量 / 杂质元素
+            - generic [ref=e104]:
+              - checkbox "启用/禁用此元素" [ref=e105] [cursor=pointer]
+              - generic [ref=e106]: P
+              - spinbutton [disabled] [ref=e107]: "1e-10"
+              - generic [ref=e108]: g
+            - generic [ref=e109]:
+              - checkbox "启用/禁用此元素" [ref=e110] [cursor=pointer]
+              - generic [ref=e111]: S
+              - spinbutton [disabled] [ref=e112]: "1e-10"
+              - generic [ref=e113]: g
+            - generic [ref=e114]:
+              - checkbox "启用/禁用此元素" [ref=e115] [cursor=pointer]
+              - generic [ref=e116]: Ca
+              - spinbutton [disabled] [ref=e117]: "1e-10"
+              - generic [ref=e118]: g
+            - generic [ref=e119]:
+              - checkbox "启用/禁用此元素" [ref=e120] [cursor=pointer]
+              - generic [ref=e121]: Cu
+              - spinbutton [disabled] [ref=e122]: "1e-10"
+              - generic [ref=e123]: g
+            - generic [ref=e124]:
+              - checkbox "启用/禁用此元素" [ref=e125] [cursor=pointer]
+              - generic [ref=e126]: Co
+              - spinbutton [disabled] [ref=e127]: "1e-10"
+              - generic [ref=e128]: g
+            - generic [ref=e129]:
+              - checkbox "启用/禁用此元素" [ref=e130] [cursor=pointer]
+              - generic [ref=e131]: Mg
+              - spinbutton [disabled] [ref=e132]: "1e-10"
+              - generic [ref=e133]: g
+      - generic [ref=e134]:
+        - heading "温度范围与压力" [level=2] [ref=e135]
+        - generic [ref=e136]:
+          - generic [ref=e137]:
+            - generic [ref=e138]: 起始温度 (°C)
+            - spinbutton "起始温度 (°C)" [ref=e139]: "800"
+          - generic [ref=e140]:
+            - generic [ref=e141]: 终止温度 (°C)
+            - spinbutton "终止温度 (°C)" [ref=e142]: "1600"
+          - generic [ref=e143]:
+            - generic [ref=e144]: 步长 (°C)
+            - spinbutton "步长 (°C)" [ref=e145]: "10"
+          - generic [ref=e146]:
+            - generic [ref=e147]: 压力 (atm)
+            - spinbutton "压力 (atm)" [ref=e148]: "1"
+      - button "开始计算" [ref=e150] [cursor=pointer]
+      - generic [ref=e151]:
+        - heading "历史记录" [level=2] [ref=e152]
+        - generic [ref=e153]:
+          - generic "d89a4c2f" [ref=e154] [cursor=pointer]:
+            - generic [ref=e155]: d89a4c2f 05-10 10:44
+            - generic [ref=e156]: 已完成
+          - generic "ca93f0da" [ref=e157] [cursor=pointer]:
+            - generic [ref=e158]: ca93f0da 05-10 10:41
+            - generic [ref=e159]: 已完成
+          - generic "e281b3e6" [ref=e160] [cursor=pointer]:
+            - generic [ref=e161]: e281b3e6 05-10 10:20
+            - generic [ref=e162]: 已完成
+          - generic "2fcad3b2" [ref=e163] [cursor=pointer]:
+            - generic [ref=e164]: 2fcad3b2 05-10 10:17
+            - generic [ref=e165]: 已完成
+          - generic "1c289029" [ref=e166] [cursor=pointer]:
+            - generic [ref=e167]: 1c289029 05-10 10:12
+            - generic [ref=e168]: 已完成
+          - generic "10a74da5" [ref=e169] [cursor=pointer]:
+            - generic [ref=e170]: 10a74da5 05-09 23:50
+            - generic [ref=e171]: 已完成
+          - generic "3e4d9b4b" [ref=e172] [cursor=pointer]:
+            - generic [ref=e173]: 3e4d9b4b 05-09 23:49
+            - generic [ref=e174]: 已完成
+          - generic "54ee5e63" [ref=e175] [cursor=pointer]:
+            - generic [ref=e176]: 54ee5e63 05-09 17:16
+            - generic [ref=e177]: 已完成
+          - generic "20553dbf" [ref=e178] [cursor=pointer]:
+            - generic [ref=e179]: 20553dbf 05-09 17:14
+            - generic [ref=e180]: 失败
+          - generic "820b2c99" [ref=e181] [cursor=pointer]:
+            - generic [ref=e182]: 820b2c99 05-09 17:09
+            - generic [ref=e183]: 失败
+          - generic "5a9de43f" [ref=e184] [cursor=pointer]:
+            - generic [ref=e185]: 5a9de43f 05-09 17:07
+            - generic [ref=e186]: 失败
+          - generic "9ecffca8" [ref=e187] [cursor=pointer]:
+            - generic [ref=e188]: 9ecffca8 05-09 17:00
+            - generic [ref=e189]: 失败
+    - generic [ref=e190]:
+      - generic [ref=e194]:
+        - generic [ref=e195]:
+          - heading "物种选择" [level=2] [ref=e196]
+          - generic [ref=e197]:
+            - generic [ref=e198]: 数值类型：
+            - combobox "数值类型：" [ref=e199] [cursor=pointer]:
+              - option "质量 (g)" [selected]
+              - option "摩尔 (mol)"
+              - option "质量分数 (wt%)"
+              - option "活度 (activity)"
+              - option "摩尔分数"
+        - paragraph [ref=e201]: 完成计算后将显示可选物种
+      - generic [ref=e202]:
+        - button "导出 CSV" [ref=e203] [cursor=pointer]
+        - button "导出 PNG" [ref=e204] [cursor=pointer]
+        - button "下载原始文件" [ref=e205] [cursor=pointer]

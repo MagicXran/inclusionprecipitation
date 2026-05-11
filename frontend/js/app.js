@@ -8,6 +8,9 @@ let speciesList = [];
 let chartInstance = null;
 let pollingTimer = null;
 
+const DEFAULT_TEMPLATE_ID = 'high_alloy_incl';
+const DEFAULT_SPECIES_MIN_GRAM = 1e-8;
+
 const STATUS_LABELS = {
     pending:   '等待中',
     running:   '计算中',
@@ -18,7 +21,8 @@ const STATUS_LABELS = {
 // ---- 初始化 ----
 document.addEventListener('DOMContentLoaded', () => {
     chartInstance = echarts.init(document.getElementById('chart'));
-    loadTemplates();
+    normalizeTemplateCard();
+    loadTemplateMeta(DEFAULT_TEMPLATE_ID);
     loadHistory();
     checkMockMode();
 
@@ -26,17 +30,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (chartInstance) chartInstance.resize();
     });
 
-    document.getElementById('templateSelect').addEventListener('change', (e) => {
-        const id = e.target.value;
-        if (id) {
-            loadTemplateMeta(id);
-        } else {
-            document.getElementById('elementInputs').innerHTML =
-                '<p class="hint-text">请先选择计算模板</p>';
-            document.getElementById('submitBtn').disabled = true;
-        }
-    });
 });
+
+function normalizeTemplateCard() {
+    if (document.getElementById('templateName')) return;
+
+    const legacySelect = document.getElementById('templateSelect');
+    const card = legacySelect ? legacySelect.closest('.card') : null;
+    if (!card) return;
+
+    card.innerHTML = `
+        <h2 class="card-title">计算体系</h2>
+        <div id="templateName" class="template-name">高合金钢 夹杂/析出</div>
+        <p id="templateDesc" class="template-desc"></p>
+    `;
+}
 
 // ============================================
 // API 调用
@@ -73,33 +81,24 @@ async function checkMockMode() {
         if (data.mock_mode) {
             document.getElementById('mockBadge').style.display = '';
         }
+        renderSpeciesThresholdOptions(data.species_filter);
     } catch {
         // 静默失败，不阻塞主流程
     }
 }
 
-// 加载模板列表
-async function loadTemplates() {
-    try {
-        const resp = await apiFetch('/api/templates');
-        const templates = await resp.json();
-        const select = document.getElementById('templateSelect');
+function renderSpeciesThresholdOptions(speciesFilter) {
+    const select = document.getElementById('speciesMinGram');
+    if (!select || !speciesFilter || !Array.isArray(speciesFilter.options)) return;
 
-        templates.forEach(t => {
-            const opt = document.createElement('option');
-            opt.value = t.id;
-            opt.textContent = t.name;
-            select.appendChild(opt);
-        });
-
-        // 如果只有一个模板，自动选中
-        if (templates.length === 1) {
-            select.value = templates[0].id;
-            loadTemplateMeta(templates[0].id);
-        }
-    } catch (err) {
-        showError('加载模板列表失败：' + err.message);
-    }
+    const defaultValue = String(speciesFilter.default_min_gram ?? DEFAULT_SPECIES_MIN_GRAM);
+    select.innerHTML = speciesFilter.options
+        .map(value => {
+            const text = `${formatNumber(value)} g`;
+            const selected = String(value) === defaultValue ? 'selected' : '';
+            return `<option value="${value}" ${selected}>${text}</option>`;
+        })
+        .join('');
 }
 
 // 加载模板元信息，填充元素输入
@@ -121,8 +120,11 @@ async function loadTemplateMeta(templateId) {
             document.getElementById('pressure').value = meta.default_pressure_atm;
         }
 
-        // 描述
-        document.getElementById('templateDesc').textContent = meta.description || '';
+        // 体系说明
+        const nameEl = document.getElementById('templateName');
+        const descEl = document.getElementById('templateDesc');
+        if (nameEl) nameEl.textContent = meta.name || '高合金钢 夹杂/析出';
+        if (descEl) descEl.textContent = meta.description || '';
 
         // 启用提交按钮
         document.getElementById('submitBtn').disabled = false;
@@ -133,12 +135,6 @@ async function loadTemplateMeta(templateId) {
 
 // 提交计算
 async function submitCalculation() {
-    const templateId = document.getElementById('templateSelect').value;
-    if (!templateId) {
-        showError('请先选择计算模板。');
-        return;
-    }
-
     // 收集全部元素数据（active 发用户值，inactive 发 1E-10）
     const elementRows = document.querySelectorAll('.element-row');
     const elements = [];
@@ -186,7 +182,7 @@ async function submitCalculation() {
     }
 
     const body = {
-        template_id: templateId,
+        template_id: DEFAULT_TEMPLATE_ID,
         elements: elements,
         temp_range: {
             start_c: startC,
@@ -254,7 +250,11 @@ function pollJobStatus(jobId) {
 // 加载物种列表
 async function loadSpeciesList(jobId) {
     try {
-        const resp = await apiFetch(`/api/jobs/${jobId}/species`);
+        const minGram = getSpeciesMinGram();
+        const params = new URLSearchParams();
+        params.set('min_gram', String(minGram));
+
+        const resp = await apiFetch(`/api/jobs/${jobId}/species?${params.toString()}`);
         speciesList = await resp.json();
         renderSpeciesList(speciesList);
 
@@ -363,6 +363,15 @@ async function loadJob(jobId) {
 // UI 渲染
 // ============================================
 
+const ELEMENT_GROUP_LABELS = {
+    base: '基体 / 间隙元素',
+    major: '主合金元素',
+    micro: '微合金元素',
+    trace: '痕量 / 杂质元素',
+};
+
+const ELEMENT_GROUP_ORDER = ['base', 'major', 'micro', 'trace'];
+
 // 渲染元素输入（带 checkbox 开关）
 function renderElementInputs(elements) {
     const container = document.getElementById('elementInputs');
@@ -372,43 +381,64 @@ function renderElementInputs(elements) {
         return;
     }
 
-    container.innerHTML = elements.map(el => {
-        const isActive = el.active !== false;
-        const isRequired = !!el.required;
-        const checkedAttr = isActive ? 'checked' : '';
-        const disabledCb = isRequired ? 'disabled' : '';
-        const disabledInput = isActive ? '' : 'disabled';
-        const rowClass = isActive ? 'element-row' : 'element-row inactive';
-        const displayVal = el.default_g ?? '';
+    const groups = {};
+    elements.forEach(el => {
+        const group = el.group || 'trace';
+        if (!groups[group]) groups[group] = [];
+        groups[group].push(el);
+    });
 
-        return `
-            <div class="${rowClass}" data-symbol="${el.symbol}">
-                <input type="checkbox"
-                    class="element-toggle"
-                    data-symbol="${el.symbol}"
-                    data-required="${isRequired}"
-                    data-default-g="${el.default_g ?? 1e-10}"
-                    ${checkedAttr} ${disabledCb}
-                    onchange="onElementToggle(this)"
-                    title="${isRequired ? '必选元素，不可关闭' : '启用/禁用此元素'}"
-                >
-                <span class="element-label">${el.symbol}</span>
-                <input type="number"
-                    class="element-input"
-                    data-symbol="${el.symbol}"
-                    data-required="${isRequired}"
-                    value="${displayVal}"
-                    step="any"
-                    placeholder="质量"
-                    ${disabledInput}
-                    oninput="updateTotalMass()"
-                >
-                <span class="element-unit">g</span>
+    const orderedGroups = [
+        ...ELEMENT_GROUP_ORDER,
+        ...Object.keys(groups).filter(g => !ELEMENT_GROUP_ORDER.includes(g)),
+    ];
+
+    container.innerHTML = orderedGroups
+        .filter(group => groups[group] && groups[group].length)
+        .map(group => `
+            <div class="element-group" data-group="${group}">
+                <div class="element-group-title">${ELEMENT_GROUP_LABELS[group] || group}</div>
+                ${groups[group].map(renderElementRow).join('')}
             </div>
-        `;
-    }).join('');
+        `).join('');
 
     updateTotalMass();
+}
+
+function renderElementRow(el) {
+    const isActive = el.active !== false;
+    const isRequired = !!el.required;
+    const checkedAttr = isActive ? 'checked' : '';
+    const disabledCb = isRequired ? 'disabled' : '';
+    const disabledInput = isActive ? '' : 'disabled';
+    const rowClass = isActive ? 'element-row' : 'element-row inactive';
+    const displayVal = el.default_g ?? '';
+
+    return `
+        <div class="${rowClass}" data-symbol="${el.symbol}">
+            <input type="checkbox"
+                class="element-toggle"
+                data-symbol="${el.symbol}"
+                data-required="${isRequired}"
+                data-default-g="${el.default_g ?? 1e-10}"
+                ${checkedAttr} ${disabledCb}
+                onchange="onElementToggle(this)"
+                title="${isRequired ? '必选元素，不可关闭' : '启用/禁用此元素'}"
+            >
+            <span class="element-label">${el.symbol}</span>
+            <input type="number"
+                class="element-input"
+                data-symbol="${el.symbol}"
+                data-required="${isRequired}"
+                value="${displayVal}"
+                step="any"
+                placeholder="质量"
+                ${disabledInput}
+                oninput="updateTotalMass()"
+            >
+            <span class="element-unit">g</span>
+        </div>
+    `;
 }
 
 // 元素开关切换
@@ -638,6 +668,12 @@ function onValueTypeChange() {
     reloadChart();
 }
 
+// 物种最小质量阈值变化 → 重新加载物种列表
+async function onSpeciesThresholdChange() {
+    if (!currentJobId) return;
+    await loadSpeciesList(currentJobId);
+}
+
 // 重载图表（收集选中物种 + 数值类型）
 async function reloadChart() {
     if (!currentJobId) return;
@@ -670,7 +706,10 @@ function exportCSV() {
         showError('请先完成一次计算。');
         return;
     }
-    window.open(`/api/jobs/${currentJobId}/export-csv`);
+    const params = new URLSearchParams();
+    params.set('min_gram', String(getSpeciesMinGram()));
+    params.set('value_type', document.getElementById('valueType').value);
+    window.open(`/api/jobs/${currentJobId}/export-csv?${params.toString()}`);
 }
 
 function downloadFiles() {
@@ -738,4 +777,10 @@ function formatNumber(val) {
     if (Math.abs(val) < 0.001 && val !== 0) return val.toExponential(3);
     if (Math.abs(val) >= 10000) return val.toExponential(3);
     return parseFloat(val.toFixed(4)).toString();
+}
+
+function getSpeciesMinGram() {
+    const el = document.getElementById('speciesMinGram');
+    const val = el ? parseFloat(el.value) : DEFAULT_SPECIES_MIN_GRAM;
+    return Number.isFinite(val) && val >= 0 ? val : DEFAULT_SPECIES_MIN_GRAM;
 }

@@ -145,6 +145,12 @@ select.input-full {
     font-style: italic;
 }
 
+.template-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a1a2e;
+}
+
 .hint-text {
     color: #aaa;
     font-size: 0.85rem;
@@ -194,10 +200,26 @@ select.input-full {
 .element-inputs {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 12px;
     max-height: 480px;
     overflow-y: auto;
     margin-top: 12px;
+}
+
+.element-group {
+    border: 1px solid #ececf4;
+    border-radius: 8px;
+    padding: 8px;
+    background: #fcfcff;
+}
+
+.element-group-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #555b72;
+    margin-bottom: 6px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ededf5;
 }
 
 .element-row {
@@ -491,6 +513,14 @@ select.input-full {
     border-bottom: none;
 }
 
+.species-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
 .value-type-selector {
     display: flex;
     align-items: center;
@@ -646,5 +676,9 @@ select.input-full {
 
     .species-header {
         flex-direction: column;
+    }
+
+    .species-controls {
+        justify-content: flex-start;
     }
 }

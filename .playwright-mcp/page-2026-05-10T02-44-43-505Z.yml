@@ -1,0 +1,591 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - heading "FactSage 夹杂物/析出相计算系统" [level=1] [ref=e3]
+    - generic [ref=e4]: 模拟模式
+  - main [ref=e5]:
+    - complementary [ref=e6]:
+      - generic [ref=e7]:
+        - heading "计算体系" [level=2] [ref=e8]
+        - generic [ref=e9]: 高合金钢 夹杂/析出
+        - paragraph [ref=e10]: 适用于含Cr/Ti/Al等高合金钢的夹杂物和析出相温度扫描计算。22元素体系
+      - generic [ref=e11]:
+        - generic [ref=e12]:
+          - heading "元素组成" [level=2] [ref=e13]
+          - generic [ref=e14]: "总质量: 100.005 g"
+        - generic [ref=e15]:
+          - generic [ref=e16]:
+            - generic [ref=e17]: 基体 / 间隙元素
+            - generic [ref=e18]:
+              - checkbox "必选元素，不可关闭" [checked] [disabled] [ref=e19]
+              - generic [ref=e20]: Fe
+              - spinbutton [ref=e21]: "56.445"
+              - generic [ref=e22]: g
+            - generic [ref=e23]:
+              - checkbox "必选元素，不可关闭" [checked] [disabled] [ref=e24]
+              - generic [ref=e25]: O
+              - spinbutton [ref=e26]: "0.01"
+              - generic [ref=e27]: g
+            - generic [ref=e28]:
+              - checkbox "启用/禁用此元素" [checked] [ref=e29] [cursor=pointer]
+              - generic [ref=e30]: C
+              - spinbutton [ref=e31]: "0.35"
+              - generic [ref=e32]: g
+            - generic [ref=e33]:
+              - checkbox "启用/禁用此元素" [ref=e34] [cursor=pointer]
+              - generic [ref=e35]: "N"
+              - spinbutton [disabled] [ref=e36]: "1e-10"
+              - generic [ref=e37]: g
+          - generic [ref=e38]:
+            - generic [ref=e39]: 主合金元素
+            - generic [ref=e40]:
+              - checkbox "启用/禁用此元素" [checked] [ref=e41] [cursor=pointer]
+              - generic [ref=e42]: Cr
+              - spinbutton [ref=e43]: "32"
+              - generic [ref=e44]: g
+            - generic [ref=e45]:
+              - checkbox "启用/禁用此元素" [checked] [ref=e46] [cursor=pointer]
+              - generic [ref=e47]: Mo
+              - spinbutton [ref=e48]: "0.8"
+              - generic [ref=e49]: g
+            - generic [ref=e50]:
+              - checkbox "启用/禁用此元素" [ref=e51] [cursor=pointer]
+              - generic [ref=e52]: W
+              - spinbutton [disabled] [ref=e53]: "1e-10"
+              - generic [ref=e54]: g
+            - generic [ref=e55]:
+              - checkbox "启用/禁用此元素" [ref=e56] [cursor=pointer]
+              - generic [ref=e57]: Si
+              - spinbutton [disabled] [ref=e58]: "1e-10"
+              - generic [ref=e59]: g
+            - generic [ref=e60]:
+              - checkbox "启用/禁用此元素" [ref=e61] [cursor=pointer]
+              - generic [ref=e62]: Mn
+              - spinbutton [disabled] [ref=e63]: "1e-10"
+              - generic [ref=e64]: g
+            - generic [ref=e65]:
+              - checkbox "启用/禁用此元素" [ref=e66] [cursor=pointer]
+              - generic [ref=e67]: Ni
+              - spinbutton [disabled] [ref=e68]: "1e-10"
+              - generic [ref=e69]: g
+          - generic [ref=e70]:
+            - generic [ref=e71]: 微合金元素
+            - generic [ref=e72]:
+              - checkbox "启用/禁用此元素" [checked] [ref=e73] [cursor=pointer]
+              - generic [ref=e74]: Ti
+              - spinbutton [ref=e75]: "8"
+              - generic [ref=e76]: g
+            - generic [ref=e77]:
+              - checkbox "启用/禁用此元素" [checked] [ref=e78] [cursor=pointer]
+              - generic [ref=e79]: Al
+              - spinbutton [ref=e80]: "2.4"
+              - generic [ref=e81]: g
+            - generic [ref=e82]:
+              - checkbox "启用/禁用此元素" [ref=e83] [cursor=pointer]
+              - generic [ref=e84]: B
+              - spinbutton [disabled] [ref=e85]: "1e-10"
+              - generic [ref=e86]: g
+            - generic [ref=e87]:
+              - checkbox "启用/禁用此元素" [ref=e88] [cursor=pointer]
+              - generic [ref=e89]: Zr
+              - spinbutton [disabled] [ref=e90]: "1e-10"
+              - generic [ref=e91]: g
+            - generic [ref=e92]:
+              - checkbox "启用/禁用此元素" [ref=e93] [cursor=pointer]
+              - generic [ref=e94]: V
+              - spinbutton [disabled] [ref=e95]: "1e-10"
+              - generic [ref=e96]: g
+            - generic [ref=e97]:
+              - checkbox "启用/禁用此元素" [ref=e98] [cursor=pointer]
+              - generic [ref=e99]: Nb
+              - spinbutton [disabled] [ref=e100]: "1e-10"
+              - generic [ref=e101]: g
+          - generic [ref=e102]:
+            - generic [ref=e103]: 痕量 / 杂质元素
+            - generic [ref=e104]:
+              - checkbox "启用/禁用此元素" [ref=e105] [cursor=pointer]
+              - generic [ref=e106]: P
+              - spinbutton [disabled] [ref=e107]: "1e-10"
+              - generic [ref=e108]: g
+            - generic [ref=e109]:
+              - checkbox "启用/禁用此元素" [ref=e110] [cursor=pointer]
+              - generic [ref=e111]: S
+              - spinbutton [disabled] [ref=e112]: "1e-10"
+              - generic [ref=e113]: g
+            - generic [ref=e114]:
+              - checkbox "启用/禁用此元素" [ref=e115] [cursor=pointer]
+              - generic [ref=e116]: Ca
+              - spinbutton [disabled] [ref=e117]: "1e-10"
+              - generic [ref=e118]: g
+            - generic [ref=e119]:
+              - checkbox "启用/禁用此元素" [ref=e120] [cursor=pointer]
+              - generic [ref=e121]: Cu
+              - spinbutton [disabled] [ref=e122]: "1e-10"
+              - generic [ref=e123]: g
+            - generic [ref=e124]:
+              - checkbox "启用/禁用此元素" [ref=e125] [cursor=pointer]
+              - generic [ref=e126]: Co
+              - spinbutton [disabled] [ref=e127]: "1e-10"
+              - generic [ref=e128]: g
+            - generic [ref=e129]:
+              - checkbox "启用/禁用此元素" [ref=e130] [cursor=pointer]
+              - generic [ref=e131]: Mg
+              - spinbutton [disabled] [ref=e132]: "1e-10"
+              - generic [ref=e133]: g
+      - generic [ref=e134]:
+        - heading "温度范围与压力" [level=2] [ref=e135]
+        - generic [ref=e136]:
+          - generic [ref=e137]:
+            - generic [ref=e138]: 起始温度 (°C)
+            - spinbutton "起始温度 (°C)" [ref=e139]: "800"
+          - generic [ref=e140]:
+            - generic [ref=e141]: 终止温度 (°C)
+            - spinbutton "终止温度 (°C)" [ref=e142]: "1600"
+          - generic [ref=e143]:
+            - generic [ref=e144]: 步长 (°C)
+            - spinbutton "步长 (°C)" [ref=e145]: "10"
+          - generic [ref=e146]:
+            - generic [ref=e147]: 压力 (atm)
+            - spinbutton "压力 (atm)" [ref=e148]: "1"
+      - generic [ref=e149]:
+        - button "开始计算" [ref=e150] [cursor=pointer]
+        - generic [ref=e208]: 已完成
+      - generic [ref=e151]:
+        - heading "历史记录" [level=2] [ref=e152]
+        - generic [ref=e153]:
+          - generic "d89a4c2f" [ref=e209] [cursor=pointer]:
+            - generic [ref=e210]: d89a4c2f 05-10 10:44
+            - generic [ref=e211]: 已完成
+          - generic "ca93f0da" [ref=e212] [cursor=pointer]:
+            - generic [ref=e213]: ca93f0da 05-10 10:41
+            - generic [ref=e214]: 已完成
+          - generic "e281b3e6" [ref=e215] [cursor=pointer]:
+            - generic [ref=e216]: e281b3e6 05-10 10:20
+            - generic [ref=e217]: 已完成
+          - generic "2fcad3b2" [ref=e218] [cursor=pointer]:
+            - generic [ref=e219]: 2fcad3b2 05-10 10:17
+            - generic [ref=e220]: 已完成
+          - generic "1c289029" [ref=e221] [cursor=pointer]:
+            - generic [ref=e222]: 1c289029 05-10 10:12
+            - generic [ref=e223]: 已完成
+          - generic "10a74da5" [ref=e224] [cursor=pointer]:
+            - generic [ref=e225]: 10a74da5 05-09 23:50
+            - generic [ref=e226]: 已完成
+          - generic "3e4d9b4b" [ref=e227] [cursor=pointer]:
+            - generic [ref=e228]: 3e4d9b4b 05-09 23:49
+            - generic [ref=e229]: 已完成
+          - generic "54ee5e63" [ref=e230] [cursor=pointer]:
+            - generic [ref=e231]: 54ee5e63 05-09 17:16
+            - generic [ref=e232]: 已完成
+          - generic "20553dbf" [ref=e233] [cursor=pointer]:
+            - generic [ref=e234]: 20553dbf 05-09 17:14
+            - generic [ref=e235]: 失败
+          - generic "820b2c99" [ref=e236] [cursor=pointer]:
+            - generic [ref=e237]: 820b2c99 05-09 17:09
+            - generic [ref=e238]: 失败
+          - generic "5a9de43f" [ref=e239] [cursor=pointer]:
+            - generic [ref=e240]: 5a9de43f 05-09 17:07
+            - generic [ref=e241]: 失败
+          - generic "9ecffca8" [ref=e242] [cursor=pointer]:
+            - generic [ref=e243]: 9ecffca8 05-09 17:00
+            - generic [ref=e244]: 失败
+    - generic [ref=e190]:
+      - generic [ref=e194]:
+        - generic [ref=e195]:
+          - heading "物种选择" [level=2] [ref=e196]
+          - generic [ref=e197]:
+            - generic [ref=e198]: 数值类型：
+            - combobox "数值类型：" [ref=e199] [cursor=pointer]:
+              - option "质量 (g)" [selected]
+              - option "摩尔 (mol)"
+              - option "质量分数 (wt%)"
+              - option "活度 (activity)"
+              - option "摩尔分数"
+        - generic [ref=e200]:
+          - generic [ref=e246]:
+            - generic [ref=e247]:
+              - generic [ref=e248]: 溶液相 (Solution Phases)
+              - button "全选/全不选" [ref=e249] [cursor=pointer]
+            - generic [ref=e250]:
+              - 'checkbox "Liquid #1 (total) max: 99.9985 g" [checked] [ref=e251] [cursor=pointer]'
+              - generic [ref=e252]: "Liquid #1 (total)"
+              - generic [ref=e253]: "max: 99.9985 g"
+            - generic [ref=e254]:
+              - 'checkbox "α-BCC #1 (total) max: 97.8245 g" [checked] [ref=e255] [cursor=pointer]'
+              - generic [ref=e256]: "α-BCC #1 (total)"
+              - generic [ref=e257]: "max: 97.8245 g"
+            - generic [ref=e258]:
+              - 'checkbox "TCF (total) max: 22.9578 g" [ref=e259] [cursor=pointer]'
+              - generic [ref=e260]: TCF (total)
+              - generic [ref=e261]: "max: 22.9578 g"
+            - generic [ref=e262]:
+              - 'checkbox "γ-FCC #1 (total) max: 2.1337 g" [ref=e263] [cursor=pointer]'
+              - generic [ref=e264]: "γ-FCC #1 (total)"
+              - generic [ref=e265]: "max: 2.1337 g"
+          - generic [ref=e266]:
+            - generic [ref=e267]:
+              - generic [ref=e268]: 析出相/纯物质 (Precipitates)
+              - button "全选/全不选" [ref=e269] [cursor=pointer]
+            - generic [ref=e270]:
+              - 'checkbox "TiO max: 0.0399 g" [ref=e271] [cursor=pointer]'
+              - generic [ref=e272]: TiO
+              - generic [ref=e273]: "max: 0.0399 g"
+            - generic [ref=e274]:
+              - 'checkbox "Al2O3 (FToxid) max: 0.0212 g" [ref=e275] [cursor=pointer]'
+              - generic [ref=e276]: Al2O3 (FToxid)
+              - generic [ref=e277]: "max: 0.0212 g"
+            - generic [ref=e278]:
+              - 'checkbox "TiB2 max: 0.0161 g" [ref=e279] [cursor=pointer]'
+              - generic [ref=e280]: TiB2
+              - generic [ref=e281]: "max: 0.0161 g"
+            - generic [ref=e282]:
+              - 'checkbox "ZrO2 (FToxid) max: 0.0129 g" [ref=e283] [cursor=pointer]'
+              - generic [ref=e284]: ZrO2 (FToxid)
+              - generic [ref=e285]: "max: 0.0129 g"
+            - generic [ref=e286]:
+              - 'checkbox "ZrO2 (FToxid) max: 0.0094 g" [ref=e287] [cursor=pointer]'
+              - generic [ref=e288]: ZrO2 (FToxid)
+              - generic [ref=e289]: "max: 0.0094 g"
+          - generic [ref=e290]:
+            - generic [ref=e291]:
+              - generic [ref=e292]: 溶液组分 (Solution Components)
+              - button "全选/全不选" [ref=e293] [cursor=pointer]
+            - generic [ref=e294]:
+              - 'checkbox "Fe in Liquid #1 max: 58.785 g" [checked] [ref=e295] [cursor=pointer]'
+              - generic [ref=e296]: "Fe in Liquid #1"
+              - generic [ref=e297]: "max: 58.785 g"
+            - generic [ref=e298]:
+              - 'checkbox "Fe in α-BCC #1 max: 58.783 g" [ref=e299] [cursor=pointer]'
+              - generic [ref=e300]: "Fe in α-BCC #1"
+              - generic [ref=e301]: "max: 58.783 g"
+            - generic [ref=e302]:
+              - 'checkbox "Cr in Liquid #1 max: 32 g" [ref=e303] [cursor=pointer]'
+              - generic [ref=e304]: "Cr in Liquid #1"
+              - generic [ref=e305]: "max: 32 g"
+            - generic [ref=e306]:
+              - 'checkbox "Cr in α-BCC #1 max: 31.9986 g" [ref=e307] [cursor=pointer]'
+              - generic [ref=e308]: "Cr in α-BCC #1"
+              - generic [ref=e309]: "max: 31.9986 g"
+            - generic [ref=e310]:
+              - 'checkbox "Ti5Fe24 in TCF max: 16.6593 g" [ref=e311] [cursor=pointer]'
+              - generic [ref=e312]: Ti5Fe24 in TCF
+              - generic [ref=e313]: "max: 16.6593 g"
+            - generic [ref=e314]:
+              - 'checkbox "Ti5Cr24 in TCF max: 6.2985 g" [ref=e315] [cursor=pointer]'
+              - generic [ref=e316]: Ti5Cr24 in TCF
+              - generic [ref=e317]: "max: 6.2985 g"
+            - generic [ref=e318]:
+              - 'checkbox "Ti in Liquid #1 max: 5.4 g" [ref=e319] [cursor=pointer]'
+              - generic [ref=e320]: "Ti in Liquid #1"
+              - generic [ref=e321]: "max: 5.4 g"
+            - generic [ref=e322]:
+              - 'checkbox "Ti in α-BCC #1 max: 3.6379 g" [ref=e323] [cursor=pointer]'
+              - generic [ref=e324]: "Ti in α-BCC #1"
+              - generic [ref=e325]: "max: 3.6379 g"
+            - generic [ref=e326]:
+              - 'checkbox "Al in α-BCC #1 max: 2.4 g" [ref=e327] [cursor=pointer]'
+              - generic [ref=e328]: "Al in α-BCC #1"
+              - generic [ref=e329]: "max: 2.4 g"
+            - generic [ref=e330]:
+              - 'checkbox "Al in Liquid #1 max: 2.3992 g" [ref=e331] [cursor=pointer]'
+              - generic [ref=e332]: "Al in Liquid #1"
+              - generic [ref=e333]: "max: 2.3992 g"
+            - generic [ref=e334]:
+              - 'checkbox "TiC in γ-FCC #1 max: 1.7201 g" [ref=e335] [cursor=pointer]'
+              - generic [ref=e336]: "TiC in γ-FCC #1"
+              - generic [ref=e337]: "max: 1.7201 g"
+            - generic [ref=e338]:
+              - 'checkbox "Mo in Liquid #1 max: 0.8 g" [ref=e339] [cursor=pointer]'
+              - generic [ref=e340]: "Mo in Liquid #1"
+              - generic [ref=e341]: "max: 0.8 g"
+            - generic [ref=e342]:
+              - 'checkbox "Mo in α-BCC #1 max: 0.7992 g" [ref=e343] [cursor=pointer]'
+              - generic [ref=e344]: "Mo in α-BCC #1"
+              - generic [ref=e345]: "max: 0.7992 g"
+            - generic [ref=e346]:
+              - 'checkbox "Ti in γ-FCC #1 max: 0.364 g" [ref=e347] [cursor=pointer]'
+              - generic [ref=e348]: "Ti in γ-FCC #1"
+              - generic [ref=e349]: "max: 0.364 g"
+            - generic [ref=e350]:
+              - 'checkbox "C in Liquid #1 max: 0.35 g" [ref=e351] [cursor=pointer]'
+              - generic [ref=e352]: "C in Liquid #1"
+              - generic [ref=e353]: "max: 0.35 g"
+            - generic [ref=e354]:
+              - 'checkbox "W in Liquid #1 max: 0.2 g" [ref=e355] [cursor=pointer]'
+              - generic [ref=e356]: "W in Liquid #1"
+              - generic [ref=e357]: "max: 0.2 g"
+            - generic [ref=e358]:
+              - 'checkbox "W in α-BCC #1 max: 0.1998 g" [ref=e359] [cursor=pointer]'
+              - generic [ref=e360]: "W in α-BCC #1"
+              - generic [ref=e361]: "max: 0.1998 g"
+            - generic [ref=e362]:
+              - 'checkbox "Zr in Liquid #1 max: 0.05 g" [ref=e363] [cursor=pointer]'
+              - generic [ref=e364]: "Zr in Liquid #1"
+              - generic [ref=e365]: "max: 0.05 g"
+            - generic [ref=e366]:
+              - 'checkbox "ZrC in γ-FCC #1 max: 0.0474 g" [ref=e367] [cursor=pointer]'
+              - generic [ref=e368]: "ZrC in γ-FCC #1"
+              - generic [ref=e369]: "max: 0.0474 g"
+            - generic [ref=e370]:
+              - 'checkbox "FeC3 in α-BCC #1 max: 0.0098 g" [ref=e371] [cursor=pointer]'
+              - generic [ref=e372]: "FeC3 in α-BCC #1"
+              - generic [ref=e373]: "max: 0.0098 g"
+            - generic [ref=e374]:
+              - 'checkbox "Zr in γ-FCC #1 max: 0.0098 g" [ref=e375] [cursor=pointer]'
+              - generic [ref=e376]: "Zr in γ-FCC #1"
+              - generic [ref=e377]: "max: 0.0098 g"
+            - generic [ref=e378]:
+              - 'checkbox "O in Liquid #1 max: 0.0093 g" [ref=e379] [cursor=pointer]'
+              - generic [ref=e380]: "O in Liquid #1"
+              - generic [ref=e381]: "max: 0.0093 g"
+            - generic [ref=e382]:
+              - 'checkbox "Zr in α-BCC #1 max: 0.0067 g" [ref=e383] [cursor=pointer]'
+              - generic [ref=e384]: "Zr in α-BCC #1"
+              - generic [ref=e385]: "max: 0.0067 g"
+            - generic [ref=e386]:
+              - 'checkbox "CrC3 in α-BCC #1 max: 0.0059 g" [ref=e387] [cursor=pointer]'
+              - generic [ref=e388]: "CrC3 in α-BCC #1"
+              - generic [ref=e389]: "max: 0.0059 g"
+            - generic [ref=e390]:
+              - 'checkbox "B in Liquid #1 max: 0.005 g" [ref=e391] [cursor=pointer]'
+              - generic [ref=e392]: "B in Liquid #1"
+              - generic [ref=e393]: "max: 0.005 g"
+            - generic [ref=e394]:
+              - 'checkbox "FeC in γ-FCC #1 max: 0.0047 g" [ref=e395] [cursor=pointer]'
+              - generic [ref=e396]: "FeC in γ-FCC #1"
+              - generic [ref=e397]: "max: 0.0047 g"
+            - generic [ref=e398]:
+              - 'checkbox "CrC in γ-FCC #1 max: 0.0035 g" [ref=e399] [cursor=pointer]'
+              - generic [ref=e400]: "CrC in γ-FCC #1"
+              - generic [ref=e401]: "max: 0.0035 g"
+            - generic [ref=e402]:
+              - 'checkbox "MoC in γ-FCC #1 max: 0.003 g" [ref=e403] [cursor=pointer]'
+              - generic [ref=e404]: "MoC in γ-FCC #1"
+              - generic [ref=e405]: "max: 0.003 g"
+            - generic [ref=e406]:
+              - 'checkbox "Fe in γ-FCC #1 max: 0.001 g" [ref=e407] [cursor=pointer]'
+              - generic [ref=e408]: "Fe in γ-FCC #1"
+              - generic [ref=e409]: "max: 0.001 g"
+            - generic [ref=e410]:
+              - 'checkbox "FeB3 in α-BCC #1 max: 8.014e-4 g" [ref=e411] [cursor=pointer]'
+              - generic [ref=e412]: "FeB3 in α-BCC #1"
+              - generic [ref=e413]: "max: 8.014e-4 g"
+            - generic [ref=e414]:
+              - 'checkbox "Cr in γ-FCC #1 max: 7.253e-4 g" [ref=e415] [cursor=pointer]'
+              - generic [ref=e416]: "Cr in γ-FCC #1"
+              - generic [ref=e417]: "max: 7.253e-4 g"
+            - generic [ref=e418]:
+              - 'checkbox "Mo in γ-FCC #1 max: 6.911e-4 g" [ref=e419] [cursor=pointer]'
+              - generic [ref=e420]: "Mo in γ-FCC #1"
+              - generic [ref=e421]: "max: 6.911e-4 g"
+            - generic [ref=e422]:
+              - 'checkbox "AlC3 in α-BCC #1 max: 6.460e-4 g" [ref=e423] [cursor=pointer]'
+              - generic [ref=e424]: "AlC3 in α-BCC #1"
+              - generic [ref=e425]: "max: 6.460e-4 g"
+            - generic [ref=e426]:
+              - 'checkbox "TiC3 in α-BCC #1 max: 5.471e-4 g" [ref=e427] [cursor=pointer]'
+              - generic [ref=e428]: "TiC3 in α-BCC #1"
+              - generic [ref=e429]: "max: 5.471e-4 g"
+            - generic [ref=e430]:
+              - 'checkbox "CrB3 in α-BCC #1 max: 4.485e-4 g" [ref=e431] [cursor=pointer]'
+              - generic [ref=e432]: "CrB3 in α-BCC #1"
+              - generic [ref=e433]: "max: 4.485e-4 g"
+            - generic [ref=e434]:
+              - 'checkbox "WC in γ-FCC #1 max: 3.226e-4 g" [ref=e435] [cursor=pointer]'
+              - generic [ref=e436]: "WC in γ-FCC #1"
+              - generic [ref=e437]: "max: 3.226e-4 g"
+            - generic [ref=e438]:
+              - 'checkbox "MoC3 in α-BCC #1 max: 1.048e-4 g" [ref=e439] [cursor=pointer]'
+              - generic [ref=e440]: "MoC3 in α-BCC #1"
+              - generic [ref=e441]: "max: 1.048e-4 g"
+            - generic [ref=e442]:
+              - 'checkbox "W in γ-FCC #1 max: 7.750e-5 g" [ref=e443] [cursor=pointer]'
+              - generic [ref=e444]: "W in γ-FCC #1"
+              - generic [ref=e445]: "max: 7.750e-5 g"
+            - generic [ref=e446]:
+              - 'checkbox "TiB3 in α-BCC #1 max: 5.264e-5 g" [ref=e447] [cursor=pointer]'
+              - generic [ref=e448]: "TiB3 in α-BCC #1"
+              - generic [ref=e449]: "max: 5.264e-5 g"
+            - generic [ref=e450]:
+              - 'checkbox "TiB in γ-FCC #1 max: 5.218e-5 g" [ref=e451] [cursor=pointer]'
+              - generic [ref=e452]: "TiB in γ-FCC #1"
+              - generic [ref=e453]: "max: 5.218e-5 g"
+            - generic [ref=e454]:
+              - 'checkbox "AlB3 in α-BCC #1 max: 4.568e-5 g" [ref=e455] [cursor=pointer]'
+              - generic [ref=e456]: "AlB3 in α-BCC #1"
+              - generic [ref=e457]: "max: 4.568e-5 g"
+            - generic [ref=e458]:
+              - 'checkbox "WC3 in α-BCC #1 max: 2.448e-5 g" [ref=e459] [cursor=pointer]'
+              - generic [ref=e460]: "WC3 in α-BCC #1"
+              - generic [ref=e461]: "max: 2.448e-5 g"
+            - generic [ref=e462]:
+              - 'checkbox "MoB3 in α-BCC #1 max: 9.207e-6 g" [ref=e463] [cursor=pointer]'
+              - generic [ref=e464]: "MoB3 in α-BCC #1"
+              - generic [ref=e465]: "max: 9.207e-6 g"
+            - generic [ref=e466]:
+              - 'checkbox "WB3 in α-BCC #1 max: 2.027e-6 g" [ref=e467] [cursor=pointer]'
+              - generic [ref=e468]: "WB3 in α-BCC #1"
+              - generic [ref=e469]: "max: 2.027e-6 g"
+            - generic [ref=e470]:
+              - 'checkbox "ZrB in γ-FCC #1 max: 1.237e-6 g" [ref=e471] [cursor=pointer]'
+              - generic [ref=e472]: "ZrB in γ-FCC #1"
+              - generic [ref=e473]: "max: 1.237e-6 g"
+            - generic [ref=e474]:
+              - 'checkbox "ZrC3 in α-BCC #1 max: 9.127e-7 g" [ref=e475] [cursor=pointer]'
+              - generic [ref=e476]: "ZrC3 in α-BCC #1"
+              - generic [ref=e477]: "max: 9.127e-7 g"
+            - generic [ref=e478]:
+              - 'checkbox "AlC in γ-FCC #1 max: 7.220e-7 g" [ref=e479] [cursor=pointer]'
+              - generic [ref=e480]: "AlC in γ-FCC #1"
+              - generic [ref=e481]: "max: 7.220e-7 g"
+            - generic [ref=e482]:
+              - 'checkbox "Al in γ-FCC #1 max: 1.255e-7 g" [ref=e483] [cursor=pointer]'
+              - generic [ref=e484]: "Al in γ-FCC #1"
+              - generic [ref=e485]: "max: 1.255e-7 g"
+            - generic [ref=e486]:
+              - 'checkbox "FeB in γ-FCC #1 max: 7.671e-8 g" [ref=e487] [cursor=pointer]'
+              - generic [ref=e488]: "FeB in γ-FCC #1"
+              - generic [ref=e489]: "max: 7.671e-8 g"
+            - generic [ref=e490]:
+              - 'checkbox "ZrB3 in α-BCC #1 max: 6.144e-8 g" [ref=e491] [cursor=pointer]'
+              - generic [ref=e492]: "ZrB3 in α-BCC #1"
+              - generic [ref=e493]: "max: 6.144e-8 g"
+            - generic [ref=e494]:
+              - 'checkbox "MoB in γ-FCC #1 max: 6.077e-8 g" [ref=e495] [cursor=pointer]'
+              - generic [ref=e496]: "MoB in γ-FCC #1"
+              - generic [ref=e497]: "max: 6.077e-8 g"
+            - generic [ref=e498]:
+              - 'checkbox "CrB in γ-FCC #1 max: 5.720e-8 g" [ref=e499] [cursor=pointer]'
+              - generic [ref=e500]: "CrB in γ-FCC #1"
+              - generic [ref=e501]: "max: 5.720e-8 g"
+          - generic [ref=e502]:
+            - generic [ref=e503]:
+              - generic [ref=e504]: 元素 (Elements)
+              - button "全选/全不选" [ref=e505] [cursor=pointer]
+            - generic [ref=e506]:
+              - 'checkbox "Fe (element) max: 58.785 g" [checked] [ref=e507] [cursor=pointer]'
+              - generic [ref=e508]: Fe (element)
+              - generic [ref=e509]: "max: 58.785 g"
+            - generic [ref=e510]:
+              - 'checkbox "Fe (element) max: 58.7839 g" [checked] [ref=e511] [cursor=pointer]'
+              - generic [ref=e512]: Fe (element)
+              - generic [ref=e513]: "max: 58.7839 g"
+            - generic [ref=e514]:
+              - 'checkbox "Cr (element) max: 32 g" [ref=e515] [cursor=pointer]'
+              - generic [ref=e516]: Cr (element)
+              - generic [ref=e517]: "max: 32 g"
+            - generic [ref=e518]:
+              - 'checkbox "Cr (element) max: 31.9991 g" [ref=e519] [cursor=pointer]'
+              - generic [ref=e520]: Cr (element)
+              - generic [ref=e521]: "max: 31.9991 g"
+            - generic [ref=e522]:
+              - 'checkbox "Fe (element) max: 14.1352 g" [ref=e523] [cursor=pointer]'
+              - generic [ref=e524]: Fe (element)
+              - generic [ref=e525]: "max: 14.1352 g"
+            - generic [ref=e526]:
+              - 'checkbox "Ti (element) max: 5.4 g" [ref=e527] [cursor=pointer]'
+              - generic [ref=e528]: Ti (element)
+              - generic [ref=e529]: "max: 5.4 g"
+            - generic [ref=e530]:
+              - 'checkbox "Cr (element) max: 5.2849 g" [ref=e531] [cursor=pointer]'
+              - generic [ref=e532]: Cr (element)
+              - generic [ref=e533]: "max: 5.2849 g"
+            - generic [ref=e534]:
+              - 'checkbox "Ti (element) max: 3.6381 g" [ref=e535] [cursor=pointer]'
+              - generic [ref=e536]: Ti (element)
+              - generic [ref=e537]: "max: 3.6381 g"
+            - generic [ref=e538]:
+              - 'checkbox "Ti (element) max: 3.5377 g" [ref=e539] [cursor=pointer]'
+              - generic [ref=e540]: Ti (element)
+              - generic [ref=e541]: "max: 3.5377 g"
+            - generic [ref=e542]:
+              - 'checkbox "Al (element) max: 2.4 g" [ref=e543] [cursor=pointer]'
+              - generic [ref=e544]: Al (element)
+              - generic [ref=e545]: "max: 2.4 g"
+            - generic [ref=e546]:
+              - 'checkbox "Al (element) max: 2.3992 g" [ref=e547] [cursor=pointer]'
+              - generic [ref=e548]: Al (element)
+              - generic [ref=e549]: "max: 2.3992 g"
+            - generic [ref=e550]:
+              - 'checkbox "Ti (element) max: 1.7344 g" [ref=e551] [cursor=pointer]'
+              - generic [ref=e552]: Ti (element)
+              - generic [ref=e553]: "max: 1.7344 g"
+            - generic [ref=e554]:
+              - 'checkbox "Mo (element) max: 0.8 g" [ref=e555] [cursor=pointer]'
+              - generic [ref=e556]: Mo (element)
+              - generic [ref=e557]: "max: 0.8 g"
+            - generic [ref=e558]:
+              - 'checkbox "Mo (element) max: 0.7992 g" [ref=e559] [cursor=pointer]'
+              - generic [ref=e560]: Mo (element)
+              - generic [ref=e561]: "max: 0.7992 g"
+            - generic [ref=e562]:
+              - 'checkbox "C (element) max: 0.35 g" [ref=e563] [cursor=pointer]'
+              - generic [ref=e564]: C (element)
+              - generic [ref=e565]: "max: 0.35 g"
+            - generic [ref=e566]:
+              - 'checkbox "C (element) max: 0.3499 g" [ref=e567] [cursor=pointer]'
+              - generic [ref=e568]: C (element)
+              - generic [ref=e569]: "max: 0.3499 g"
+            - generic [ref=e570]:
+              - 'checkbox "W (element) max: 0.2 g" [ref=e571] [cursor=pointer]'
+              - generic [ref=e572]: W (element)
+              - generic [ref=e573]: "max: 0.2 g"
+            - generic [ref=e574]:
+              - 'checkbox "W (element) max: 0.1998 g" [ref=e575] [cursor=pointer]'
+              - generic [ref=e576]: W (element)
+              - generic [ref=e577]: "max: 0.1998 g"
+            - generic [ref=e578]:
+              - 'checkbox "Zr (element) max: 0.05 g" [ref=e579] [cursor=pointer]'
+              - generic [ref=e580]: Zr (element)
+              - generic [ref=e581]: "max: 0.05 g"
+            - generic [ref=e582]:
+              - 'checkbox "Zr (element) max: 0.05 g" [ref=e583] [cursor=pointer]'
+              - generic [ref=e584]: Zr (element)
+              - generic [ref=e585]: "max: 0.05 g"
+            - generic [ref=e586]:
+              - 'checkbox "O (element) max: 0.0093 g" [ref=e587] [cursor=pointer]'
+              - generic [ref=e588]: O (element)
+              - generic [ref=e589]: "max: 0.0093 g"
+            - generic [ref=e590]:
+              - 'checkbox "C (element) max: 0.0069 g" [ref=e591] [cursor=pointer]'
+              - generic [ref=e592]: C (element)
+              - generic [ref=e593]: "max: 0.0069 g"
+            - generic [ref=e594]:
+              - 'checkbox "Zr (element) max: 0.0067 g" [ref=e595] [cursor=pointer]'
+              - generic [ref=e596]: Zr (element)
+              - generic [ref=e597]: "max: 0.0067 g"
+            - generic [ref=e598]:
+              - 'checkbox "B (element) max: 0.005 g" [ref=e599] [cursor=pointer]'
+              - generic [ref=e600]: B (element)
+              - generic [ref=e601]: "max: 0.005 g"
+            - generic [ref=e602]:
+              - 'checkbox "Fe (element) max: 0.0049 g" [ref=e603] [cursor=pointer]'
+              - generic [ref=e604]: Fe (element)
+              - generic [ref=e605]: "max: 0.0049 g"
+            - generic [ref=e606]:
+              - 'checkbox "Cr (element) max: 0.0036 g" [ref=e607] [cursor=pointer]'
+              - generic [ref=e608]: Cr (element)
+              - generic [ref=e609]: "max: 0.0036 g"
+            - generic [ref=e610]:
+              - 'checkbox "Mo (element) max: 0.0034 g" [ref=e611] [cursor=pointer]'
+              - generic [ref=e612]: Mo (element)
+              - generic [ref=e613]: "max: 0.0034 g"
+            - generic [ref=e614]:
+              - 'checkbox "B (element) max: 5.155e-4 g" [ref=e615] [cursor=pointer]'
+              - generic [ref=e616]: B (element)
+              - generic [ref=e617]: "max: 5.155e-4 g"
+            - generic [ref=e618]:
+              - 'checkbox "W (element) max: 3.803e-4 g" [ref=e619] [cursor=pointer]'
+              - generic [ref=e620]: W (element)
+              - generic [ref=e621]: "max: 3.803e-4 g"
+            - generic [ref=e622]:
+              - 'checkbox "B (element) max: 9.773e-6 g" [ref=e623] [cursor=pointer]'
+              - generic [ref=e624]: B (element)
+              - generic [ref=e625]: "max: 9.773e-6 g"
+            - generic [ref=e626]:
+              - 'checkbox "Al (element) max: 6.251e-7 g" [ref=e627] [cursor=pointer]'
+              - generic [ref=e628]: Al (element)
+              - generic [ref=e629]: "max: 6.251e-7 g"
+      - generic [ref=e202]:
+        - button "导出 CSV" [ref=e203] [cursor=pointer]
+        - button "导出 PNG" [ref=e204] [cursor=pointer]
+        - button "下载原始文件" [ref=e205] [cursor=pointer]

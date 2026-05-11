@@ -13,7 +13,7 @@ from typing import Dict, List, Optional
 from ..models import JobRequest, JobStatus
 from .db import JobDB
 from .factsage_runner import run_calculation
-from .res_parser import ResParser
+from .res_parser import ResParser, parsed_result_to_dict
 from .template_renderer import render_job_files
 
 logger = logging.getLogger(__name__)
@@ -151,7 +151,7 @@ class JobManager:
                 else:
                     # 真实模式: 解析 .res → ParsedResult → JSON
                     parsed = self._parser.parse(output_path)
-                    result_json = self._serialize_result(parsed)
+                    result_json = parsed_result_to_dict(parsed)
                     result_path = paths["out_dir"] / "parsed_result.json"
                     with open(result_path, "w", encoding="utf-8") as f:
                         json.dump(result_json, f, ensure_ascii=False)
@@ -165,34 +165,6 @@ class JobManager:
                 logger.error("任务 %s 失败: %s", job_id, exc, exc_info=True)
             finally:
                 self._queue.task_done()
-
-    @staticmethod
-    def _serialize_result(parsed) -> Dict:
-        """将 ParsedResult 转为可 JSON 序列化的 dict"""
-        species_list = []
-        for s in parsed.species:
-            species_list.append({
-                "name": s.definition.raw_name,
-                "display_name": s.definition.display_name,
-                "category": s.definition.category,
-                "phase": s.definition.phase,
-                "db": s.definition.db,
-                "max_gram": s.max_gram,
-                "grams": s.grams,
-                "moles": s.moles,
-                "activities": s.activities,
-                "mole_fractions": s.mole_fractions,
-                "wt_pcts": s.wt_pcts,
-            })
-        return {
-            "temperatures": parsed.temperatures,
-            "n_steps": parsed.n_steps,
-            "n_solutions": parsed.n_solutions,
-            "version": parsed.version,
-            "reactant_summary": parsed.reactant_summary,
-            "species": species_list,
-        }
-
 
 # 全局单例
 job_manager = JobManager()

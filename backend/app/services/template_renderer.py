@@ -46,6 +46,11 @@ def _write_text(path: Path, text: str) -> None:
     path.write_text(text, encoding="utf-8", newline="")
 
 
+def _macro_path(path: Path) -> str:
+    """FactSage 宏里使用保守的绝对 Windows 路径。"""
+    return str(path.resolve()).replace("/", "\\")
+
+
 def _render_tpl(template_text: str, variables: Dict[str, str]) -> str:
     """简单 {{KEY}} → value 替换"""
     result = template_text
@@ -55,6 +60,62 @@ def _render_tpl(template_text: str, variables: Dict[str, str]) -> str:
     if remaining:
         raise ValueError(f"模板中存在未替换的占位符: {remaining}")
     return result
+
+
+def _mass_placeholders(template_text: str) -> list[str]:
+    """提取模板中的 MASS_* 元素占位符。"""
+    return re.findall(r"\{\{MASS_([A-Z][a-z]?)\}\}", template_text)
+
+
+def _validate_template_contract(template_id: str, meta: dict, template_text: str) -> None:
+    """确保 meta 元素全集与 .equi.tpl 占位符一一对应。"""
+    meta_symbols = [e["symbol"] for e in meta.get("supported_elements", [])]
+    if len(meta_symbols) != len(set(meta_symbols)):
+        duplicated = sorted({s for s in meta_symbols if meta_symbols.count(s) > 1})
+        raise ValueError(f"模板 '{template_id}' 的 meta.json 存在重复元素: {duplicated}")
+
+    placeholders = _mass_placeholders(template_text)
+    if len(placeholders) != len(set(placeholders)):
+        duplicated = sorted({s for s in placeholders if placeholders.count(s) > 1})
+        raise ValueError(f"模板 '{template_id}' 的 case.equi.tpl 存在重复占位符: {duplicated}")
+
+    meta_set = set(meta_symbols)
+    placeholder_set = set(placeholders)
+    missing = sorted(meta_set - placeholder_set)
+    extra = sorted(placeholder_set - meta_set)
+    if missing or extra:
+        raise ValueError(
+            f"模板 '{template_id}' 的 meta 与占位符不一致: "
+            f"meta未出现在模板={missing}, 模板未登记={extra}"
+        )
+
+
+def _build_mass_variables(
+    template_id: str,
+    meta: dict,
+    elements: List[Dict[str, Any]],
+) -> Dict[str, str]:
+    """用户提交值覆盖 meta 默认值，缺失元素由后端兜底补齐。"""
+    element_defs = meta.get("supported_elements", [])
+    supported = {e["symbol"]: e for e in element_defs}
+    variables: Dict[str, str] = {}
+    seen: set[str] = set()
+
+    for elem in elements:
+        symbol = elem["symbol"]
+        if symbol in seen:
+            raise ValueError(f"模板 '{template_id}' 收到重复元素: {symbol}")
+        if symbol not in supported:
+            raise ValueError(f"模板 '{template_id}' 不支持元素: {symbol}")
+        seen.add(symbol)
+        variables[f"MASS_{symbol}"] = str(elem["mass_g"])
+
+    for symbol, elem_def in supported.items():
+        key = f"MASS_{symbol}"
+        if key not in variables:
+            variables[key] = str(elem_def.get("default_g", 1e-10))
+
+    return variables
 
 
 # ── 主渲染函数 ──────────────────────────────────────────
@@ -83,18 +144,16 @@ def render_job_files(
     in_dir.mkdir(parents=True, exist_ok=True)
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    # 2) 读取 .equi.tpl 模板
+    # 2) 读取模板元数据和 .equi.tpl 模板
+    meta = load_template_meta(template_id)
     tpl_path = settings.templates_dir / template_id / "case.equi.tpl"
     if not tpl_path.exists():
         raise FileNotFoundError(f"模板文件不存在: {tpl_path}")
     tpl_text = _read_text(tpl_path)
+    _validate_template_contract(template_id, meta, tpl_text)
 
     # 3) 构建替换变量
-    variables: Dict[str, str] = {}
-    for elem in elements:
-        key = f"MASS_{elem['symbol']}"
-        variables[key] = str(elem["mass_g"])
-
+    variables = _build_mass_variables(template_id, meta, elements)
     variables["T_START"] = str(temp_range.get("start_c", 800))
     variables["T_END"] = str(temp_range.get("end_c", 1600))
     variables["T_STEP"] = str(temp_range.get("step_c", 10))
@@ -106,16 +165,18 @@ def render_job_files(
     _write_text(equi_path, equi_text)
 
     # 5) 生成 .mac 文件（通用格式，所有模板共享）
+    equi_macro_path = _macro_path(equi_path)
+    result_macro_path = _macro_path(out_dir / "result.res")
     mac_text = (
-        "VARIABLE %EquiFile %OutDir\r\n"
+        "VARIABLE %EquiFile %OutFile\r\n"
         "HIDE\r\n"
         "HIDE_MACRO\r\n"
-        f"%EquiFile = \"{equi_path}\"\r\n"
-        f"%OutDir = \"{out_dir}\\\\\"\r\n"
+        f"%EquiFile = \"{equi_macro_path}\"\r\n"
+        f"%OutFile = \"{result_macro_path}\"\r\n"
         "\r\n"
         "OPEN %EquiFile\r\n"
         "CALC\r\n"
-        "SAVE \"%OutDirresult.res\"\r\n"
+        "SAVE %OutFile\r\n"
         "\r\n"
         "END\r\n"
     )

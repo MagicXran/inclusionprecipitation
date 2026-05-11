@@ -17,12 +17,10 @@
     <main class="main-container">
         <!-- 左侧面板：输入 -->
         <aside class="panel-left">
-            <!-- 模板选择 -->
+            <!-- 当前计算体系 -->
             <section class="card">
-                <h2 class="card-title">计算模板</h2>
-                <select id="templateSelect" class="input-full">
-                    <option value="">-- 请选择模板 --</option>
-                </select>
+                <h2 class="card-title">计算体系</h2>
+                <div id="templateName" class="template-name">高合金钢 夹杂/析出</div>
                 <p id="templateDesc" class="template-desc"></p>
             </section>
 
@@ -35,7 +33,7 @@
                     </div>
                 </div>
                 <div id="elementInputs" class="element-inputs">
-                    <p class="hint-text">请先选择计算模板</p>
+                    <p class="hint-text">正在加载元素配置...</p>
                 </div>
             </section>
 
@@ -94,15 +92,26 @@
             <div class="card">
                 <div class="species-header">
                     <h2 class="card-title">物种选择</h2>
-                    <div class="value-type-selector">
-                        <label for="valueType">数值类型：</label>
-                        <select id="valueType" onchange="onValueTypeChange()">
-                            <option value="gram" selected>质量 (g)</option>
-                            <option value="mole">摩尔 (mol)</option>
-                            <option value="wt_pct">质量分数 (wt%)</option>
-                            <option value="activity">活度 (activity)</option>
-                            <option value="mole_fraction">摩尔分数</option>
-                        </select>
+                    <div class="species-controls">
+                        <div class="value-type-selector">
+                            <label for="speciesMinGram">最小质量：</label>
+                            <select id="speciesMinGram" onchange="onSpeciesThresholdChange()">
+                                <option value="1e-10">1e-10 g</option>
+                                <option value="1e-8" selected>1e-8 g</option>
+                                <option value="1e-6">1e-6 g</option>
+                                <option value="1e-4">1e-4 g</option>
+                            </select>
+                        </div>
+                        <div class="value-type-selector">
+                            <label for="valueType">数值类型：</label>
+                            <select id="valueType" onchange="onValueTypeChange()">
+                                <option value="gram" selected>质量 (g)</option>
+                                <option value="mole">摩尔 (mol)</option>
+                                <option value="wt_pct">质量分数 (wt%)</option>
+                                <option value="activity">活度 (activity)</option>
+                                <option value="mole_fraction">摩尔分数</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div id="speciesPanel" class="species-panel">

@@ -16,6 +16,8 @@ __all__ = [
     "SpeciesData",
     "ParsedResult",
     "ResParser",
+    "filter_species_by_min_gram",
+    "parsed_result_to_dict",
     "parse_res_file",
 ]
 
@@ -491,3 +493,35 @@ class ResParser:
 def parse_res_file(filepath: Path) -> ParsedResult:
     """解析 .res 文件的便捷入口。"""
     return ResParser().parse(filepath)
+
+
+def filter_species_by_min_gram(species: list[dict], min_gram: float) -> list[dict]:
+    """按最大质量过滤物种，避免 UI 被痕量占位和数值噪声淹没。"""
+    return [s for s in species if float(s.get("max_gram") or 0.0) >= min_gram]
+
+
+def parsed_result_to_dict(parsed: ParsedResult) -> dict:
+    """将 ParsedResult 转为 API 使用的 JSON dict。"""
+    species_list = []
+    for s in parsed.species:
+        species_list.append({
+            "name": s.definition.raw_name,
+            "display_name": s.definition.display_name,
+            "category": s.definition.category,
+            "phase": s.definition.phase,
+            "db": s.definition.db,
+            "max_gram": s.max_gram,
+            "grams": s.grams,
+            "moles": s.moles,
+            "activities": s.activities,
+            "mole_fractions": s.mole_fractions,
+            "wt_pcts": s.wt_pcts,
+        })
+    return {
+        "temperatures": parsed.temperatures,
+        "n_steps": parsed.n_steps,
+        "n_solutions": parsed.n_solutions,
+        "version": parsed.version,
+        "reactant_summary": parsed.reactant_summary,
+        "species": species_list,
+    }

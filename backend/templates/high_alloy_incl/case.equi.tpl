@@ -27,9 +27,9 @@ comments
 'I' '   '
  (1000,1,s1-FactPS,#1) (1000,1,s1-FactPS,#1) (1000,1,s-FactPS,#1) (1000,1,s-FactPS,#1)
 'R' 'NEW'
- {{MASS_Zr}} Zr  +  {{MASS_Ca}} Ca  +  {{MASS_Cu}} Cu  +  {{MASS_Co}} Co  +
+ {{MASS_Ca}} Ca  +  {{MASS_Cu}} Cu  +  {{MASS_Co}} Co  +
 'I' '   '
- (1000,1,s1-FactPS,#1) (1000,1,s1-FactPS,#1) (1000,1,s-FactPS,#1) (1000,1,s1-FactPS,#1)
+ (1000,1,s1-FactPS,#1) (1000,1,s-FactPS,#1) (1000,1,s1-FactPS,#1)
 'R' 'NEW'
  {{MASS_Nb}} Nb  +  {{MASS_Mg}} Mg  +  {{MASS_N}} N  =
 'I' '   '

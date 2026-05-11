@@ -53,7 +53,7 @@ class JobRequest(BaseModel):
             raise ValueError("Duplicate element symbols")
         # 只统计有效质量元素（排除 1E-10 级别的痕量占位）
         total = sum(e.mass_g for e in v if e.mass_g > 0.001)
-        if abs(total - 100.0) > 1.0:
+        if abs(total - 100.0) > 5.0:
             raise ValueError(f"Total mass must be ~100g, got {total:.2f}g")
         return v
 
