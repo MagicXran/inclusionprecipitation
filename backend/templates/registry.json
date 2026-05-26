@@ -2,7 +2,7 @@
     "templates": [
         {
             "id": "high_alloy_incl",
-            "name": "高合金钢 夹杂/析出",
+            "name": "探索模式",
             "description": "高合金钢（含Cr/Ti/Al/Mo/W/Zr/B）的夹杂物和析出相计算",
             "directory": "high_alloy_incl"
         },

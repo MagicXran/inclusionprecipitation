@@ -53,7 +53,7 @@ function normalizeTemplateCard() {
                 onchange="onTemplateChange(this.value)" disabled>
             <option value="">正在加载计算体系...</option>
         </select>
-        <div id="templateName" class="template-name">高合金钢 夹杂/析出</div>
+        <div id="templateName" class="template-name">探索模式</div>
         <p id="templateDesc" class="template-desc"></p>
     `;
 }
@@ -160,7 +160,7 @@ async function loadTemplateMeta(templateId) {
         // 体系说明
         const nameEl = document.getElementById('templateName');
         const descEl = document.getElementById('templateDesc');
-        if (nameEl) nameEl.textContent = meta.name || '高合金钢 夹杂/析出';
+        if (nameEl) nameEl.textContent = meta.name || '探索模式';
         if (descEl) descEl.textContent = meta.description || '';
 
         // 启用提交按钮
