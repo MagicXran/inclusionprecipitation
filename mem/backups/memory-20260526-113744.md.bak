@@ -1,0 +1,94 @@
+# Project Memory
+
+> Maintained by Codex hooks and reviewed by humans.
+> Durable project context only. No raw transcripts.
+
+## 0. Memory rules
+
+- 这里只保存长期有用的项目上下文。
+- 不保存完整聊天记录。
+- 不保存密钥、token、Cookie、客户隐私、内部地址、完整日志。
+- 不保存一次性闲聊、已过期猜测、无验证结论。
+- 如果信息不确定，必须标记为“待确认”。
+- 新事实必须能追溯到本次任务、代码 diff、命令输出、测试结果或用户明确说明。
+
+## 1. Project overview
+
+- 项目目标：
+- 当前技术栈：
+- 主要模块：
+- 关键业务约束：
+
+## 2. Architecture notes
+
+-
+
+## 3. Current working context
+
+- 当前重点任务：# Overview Generate 0 to 3 hyperpersonalized suggestions for what this user can do with Codex in this local project: D:\Nercar\Wuhu\Apps\factsage_app\inclusionprecipitation Get an understanding of the user's intent and goals by de ...[truncated]
+- 最近正在改的模块：git diff -- backend/templates/high_alloy_incl/meta.json backend/templates/registry.json frontend/index.html frontend/js/app.js；git show --stat --name-only origin/main；git log --oneline origin/main..HEAD；git log --oneline HEAD..origin/main
+- 当前阻塞：无明确阻塞
+- 下次继续时优先阅读：mem/memory.md；git diff -- backend/templates/high_alloy_incl/meta.json backend/templates/registry.json frontend/index.html frontend/js/app.js；git show --stat --name-only origin/main；git log --oneline origin/main..HEAD；git log --oneline HEAD..origin/main
+
+## 4. Decisions
+
+-
+
+## 5. Known constraints
+
+-
+
+## 6. Validation knowledge
+
+- 常用验证命令：
+- 最近验证结果：
+
+- 2026-05-26 11:36：rg -n "factsage-inclprecip-icon\|Image.jpg\|favicon\|icon" frontend backend build.py：结果待确认
+
+## 7. Open issues
+
+-
+
+## 8. Recent session summaries
+
+-
+
+### [2026-05-26 11:36] Session `019e6257-ae30-7633-b45f-724d868a6594`
+
+**用户目标：**
+
+- # Overview Generate 0 to 3 hyperpersonalized suggestions for what this user can do with Codex in this local project: D:\Nercar\Wuhu\Apps\factsage_app\inclusionprecipitation Get an understanding of the user's intent and goals by de ...[truncated]
+
+**本轮发现：**
+
+- 本轮包含项目文件/配置检查，具体细节以工具记录和本摘要为准。
+- 本轮包含 Git 状态或 diff 检查。
+
+**本轮变更：**
+
+- 涉及关键文件/目录：git diff -- backend/templates/high_alloy_incl/meta.json backend/templates/registry.json frontend/index.html frontend/js/app.js；git show --stat --name-only origin/main；git log --oneline origin/main..HEAD；git log --oneline HEAD..origin/main
+- {"suggestions":[{"appId":"","description":"图标文件今天已经生成到 'frontend/assets/factsage-inclprecip-icon.jpg'，但代码里仍把 '/favicon.ico' 直接返回 204，前端也没引用它。Codex 可以把图标接进页面和 FastAPI 静态资源，省得你做完图标却在运行时完全看不到。","prompt":"把新生成的 'frontend/assets/factsa ...[truncated]
+
+**关键文件/模块：**
+
+- git diff -- backend/templates/high_alloy_incl/meta.json backend/templates/registry.json frontend/index.html frontend/js/app.js
+- git show --stat --name-only origin/main
+- git log --oneline origin/main..HEAD
+- git log --oneline HEAD..origin/main
+
+**关键决策：**
+
+- 未记录到新的长期决策。
+
+**验证：**
+
+- rg -n "factsage-inclprecip-icon\\|Image.jpg\\|favicon\\|icon" frontend backend build.py：结果待确认
+
+**未完成/风险：**
+
+- 未发现明确未完成事项。
+
+**下次继续：**
+
+- 先读 mem/memory.md，再检查最近相关文件和验证记录。
+- 优先复查：git diff -- backend/templates/high_alloy_incl/meta.json backend/templates/registry.json frontend/index.html frontend/js/app.js；git show --stat --name-only origin/main；git log --oneline origin/main..HEAD；git log --oneline HEAD..origin/main

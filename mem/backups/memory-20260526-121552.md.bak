@@ -25,7 +25,7 @@
 
 ## 3. Current working context
 
-- 当前重点任务：给出向客户推广的产品介绍
+- 当前重点任务：深度思考,深入分析, 理解整个系统代码逻辑,给出介绍.
 - 最近正在改的模块：Test-Path .venv\Scripts\python.exe；.venv\Scripts\python.exe -m pytest --version；.venv\Scripts\python.exe -m pytest backend\tests
 - 当前阻塞：无明确阻塞
 - 下次继续时优先阅读：mem/memory.md；Test-Path .venv\Scripts\python.exe；.venv\Scripts\python.exe -m pytest --version；.venv\Scripts\python.exe -m pytest backend\tests
@@ -46,8 +46,6 @@
 - 2026-05-26 11:36：rg -n "factsage-inclprecip-icon\|Image.jpg\|favicon\|icon" frontend backend build.py：结果待确认
 
 - 2026-05-26 11:37：Test-Path .venv\Scripts\python.exe：结果待确认；if (Test-Path .venv\Scripts\python.exe) { .venv\Scripts\python.exe -m pytest --version }：结果待确认；.venv\Scripts\python.exe -m pytest backend\tests：结果待确认；rg --line-number "DIST_NAME\|def _write_entry\|def _stage_frontend\|def _copy_runtime_assets\|def _run_pyinstaller\|def main\|迁移时复制整个目录" build.py：结果待确认
-
-- 2026-05-26 12:15：Test-Path .venv\Scripts\python.exe：结果待确认；if (Test-Path .venv\Scripts\python.exe) { .venv\Scripts\python.exe -m pytest --version }：结果待确认；.venv\Scripts\python.exe -m pytest backend\tests：结果待确认；rg --line-number "DIST_NAME\|def _write_entry\|def _stage_frontend\|def _copy_runtime_assets\|def _run_pyinstaller\|def main\|迁移时复制整个目录" build.py：结果待确认
 
 ## 7. Open issues
 
@@ -138,44 +136,3 @@
 - 先读 mem/memory.md，再检查最近相关文件和验证记录。
 - 优先复查：Test-Path .venv\Scripts\python.exe；.venv\Scripts\python.exe -m pytest --version；.venv\Scripts\python.exe -m pytest backend\tests
 - 优先处理本摘要中的风险/未完成事项。
-
-### [2026-05-26 12:15] Session `019e6257-3802-7721-85d4-aeb8a88fe515`
-
-**用户目标：**
-
-- 给出向客户推广的产品介绍
-
-**本轮发现：**
-
-- 本轮包含项目文件/配置检查，具体细节以工具记录和本摘要为准。
-- 本轮包含 Git 状态或 diff 检查。
-
-**本轮变更：**
-
-- 涉及关键文件/目录：Test-Path .venv\Scripts\python.exe；.venv\Scripts\python.exe -m pytest --version；.venv\Scripts\python.exe -m pytest backend\tests
-
-**关键文件/模块：**
-
-- Test-Path .venv\Scripts\python.exe
-- .venv\Scripts\python.exe -m pytest --version
-- .venv\Scripts\python.exe -m pytest backend\tests
-
-**关键决策：**
-
-- 未记录到新的长期决策。
-
-**验证：**
-
-- Test-Path .venv\Scripts\python.exe：结果待确认
-- if (Test-Path .venv\Scripts\python.exe) { .venv\Scripts\python.exe -m pytest --version }：结果待确认
-- .venv\Scripts\python.exe -m pytest backend\tests：结果待确认
-- rg --line-number "DIST_NAME\\|def _write_entry\\|def _stage_frontend\\|def _copy_runtime_assets\\|def _run_pyinstaller\\|def main\\|迁移时复制整个目录" build.py：结果待确认
-
-**未完成/风险：**
-
-- 未发现明确未完成事项。
-
-**下次继续：**
-
-- 先读 mem/memory.md，再检查最近相关文件和验证记录。
-- 优先复查：Test-Path .venv\Scripts\python.exe；.venv\Scripts\python.exe -m pytest --version；.venv\Scripts\python.exe -m pytest backend\tests
