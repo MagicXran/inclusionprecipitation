@@ -1,6 +1,6 @@
 {
     "id": "high_alloy_incl",
-    "name": "高合金钢 夹杂/析出",
+    "name": "探索模式",
     "description": "适用于含Cr/Ti/Al等高合金钢的夹杂物和析出相温度扫描计算。22元素体系",
     "databases": ["FToxid (FT53)", "FSstel (ST53)", "FactPS (OX53)"],
     "supported_elements": [

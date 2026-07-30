@@ -18,8 +18,12 @@ build/
 backend/work/
 backend/data/*.db
 frontend/test_output/
+mem/
+output/
 
 *.res
+!demo/Equi2.res
+!demo/Equ2222i.res
 
 .DS_Store
 Thumbs.db
