@@ -1,0 +1,27 @@
+{
+  "files": [
+    "run.py",
+    "build.py",
+    "backend\\config.json",
+    "backend\\app\\config.py",
+    "backend\\app\\models.py",
+    "backend\\app\\main.py",
+    "backend\\app\\routers\\jobs.py",
+    "backend\\app\\services\\db.py",
+    "backend\\app\\services\\job_manager.py",
+    "backend\\app\\services\\template_renderer.py",
+    "backend\\app\\services\\factsage_runner.py",
+    "backend\\app\\services\\res_parser.py",
+    "backend\\templates\\registry.json",
+    "backend\\templates\\high_alloy_incl\\meta.json",
+    "backend\\templates\\high_alloy_incl\\case.equi.tpl",
+    "backend\\templates\\bearing_steel_52100\\meta.json",
+    "backend\\templates\\bearing_steel_52100\\case.equi.tpl",
+    "frontend\\index.html",
+    "frontend\\css\\style.css",
+    "frontend\\js\\app.js"
+  ],
+  "all_source_lines": 5347,
+  "included_lines": 3000,
+  "pages_by_50_lines": 60
+}

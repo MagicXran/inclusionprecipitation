@@ -1,0 +1,11 @@
+VARIABLE %EquiFile %OutFile
+HIDE
+HIDE_MACRO
+%EquiFile = "D:\Nercar\Wuhu\Apps\factsage_app\inclusionprecipitation\output\doc\runtime\work\b9eda1de\input\case.equi"
+%OutFile = "D:\Nercar\Wuhu\Apps\factsage_app\inclusionprecipitation\output\doc\runtime\work\b9eda1de\out\result.res"
+
+OPEN %EquiFile
+CALC
+SAVE %OutFile
+
+END

@@ -1,0 +1,31 @@
+{
+  "info": {
+    "title": "FactSage 夹杂物/析出相计算",
+    "statusBadge": "",
+    "statusText": "已完成",
+    "speciesCount": 84,
+    "template": "探索模式",
+    "selectedThreshold": "0.000001",
+    "error": "",
+    "mockBadgeVisible": true
+  },
+  "optionValues": [
+    {
+      "value": "1e-10",
+      "text": "1.000e-10 g"
+    },
+    {
+      "value": "1e-8",
+      "text": "1.000e-8 g"
+    },
+    {
+      "value": "0.000001",
+      "text": "1.000e-6 g"
+    },
+    {
+      "value": "0.0001",
+      "text": "1.000e-4 g"
+    }
+  ],
+  "logs": []
+}
